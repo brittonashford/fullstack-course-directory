@@ -1,24 +1,35 @@
-import React from 'react';
+import React, {useState, useEffect } from 'react';
+import axios from 'axios';
+import Header from './Components';
+import { CourseContext } from '..Context/Context';
+
 
 export default Courses = () => {
 
+    const [ courseList, setCourseList ] = useState([]);
+
+    const getCourseList = async () => {
+        await axios('http://localhost:5000/api/courses')
+        .then( response => setCourseList(response.data) )
+        .catch( error => console.log(error.message)) 
+    };
+
+    useEffect( () => getCourseList(), []);
 
 
     return(
         <React.Fragment>
+            <Header />
             <div class="wrap main--grid">
-                <a class="course--module course--link" href="course-detail.html">
-                    <h2 class="course--label">Course</h2>
-                    <h3 class="course--title">Build a Basic Bookcase</h3>
-                </a>
-                <a class="course--module course--link" href="course-detail.html">
-                    <h2 class="course--label">Course</h2>
-                    <h3 class="course--title">Learn How to Program</h3>
-                </a>
-                <a class="course--module course--link" href="course-detail.html">
-                    <h2 class="course--label">Course</h2>
-                    <h3 class="course--title">Learn How to Test Programs</h3>
-                </a>
+                {
+                    courseList.map((course, index) =>
+                        <a class="course--module course--link" href="course-detail.html">
+                            <h2 className="course--label">Course</h2>
+                            <h3 class="course--title">{course.title}</h3>
+                        </a>              
+                    )
+                }
+
                 <a class="course--module course--add--module" href="create-course.html">
                     <span class="course--add--title">
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
