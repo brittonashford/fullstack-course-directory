@@ -1,21 +1,21 @@
-import React, {useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Header from './Components';
-import { CourseContext } from '..Context/Context';
+import Header from './Header';
 
 
-export default Courses = () => {
 
+function Courses() {
+   //stores and updates the course list in state
     const [ courseList, setCourseList ] = useState([]);
 
     const getCourseList = async () => {
         await axios('http://localhost:5000/api/courses')
         .then( response => setCourseList(response.data) )
-        .catch( error => console.log(error.message)) 
+        .catch( error => console.log(error.message) ) 
     };
 
+    // calls function to retrieve course list from API
     useEffect( () => getCourseList(), []);
-
 
     return(
         <React.Fragment>
@@ -41,3 +41,5 @@ export default Courses = () => {
         </React.Fragment>
     );
 };
+
+export default Courses;

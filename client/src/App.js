@@ -1,16 +1,16 @@
-import React, {useContext, useEffect} from 'react';
+import React from 'react';
 import './index.css';
 import { Routes, Route, Link } from 'react-router-dom';
-import { Courses } from './Components';
+import Courses from './components/Courses';
+
 
 function App() {
-  const { courses } = useContext(CoursesContext)
+  // const { courses } = useContext(AppContext)
 
 
   //note: <Provider> wraps <App> in index.js, so context is available here
   return (
       <React.Fragment>
-        <Header></Header>
         <Routes>
           <Route exact path='/' element={<Courses />}></Route>
         </Routes>       

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Header = () => {
+function Header() {
     return(
         <header>
             <div class="wrap header--flex">
@@ -15,4 +15,6 @@ export const Header = () => {
         </header>
     )
 };
+
+export default Header;
 
