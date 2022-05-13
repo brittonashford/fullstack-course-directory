@@ -5,7 +5,7 @@ export default Error = () => {
 
     return(
         <React.Fragment>
-            <div class="wrap">
+            <div className="wrap">
                 <h2>Error</h2>
                 <p>An unexpected error has occurred.</p>
             </div>

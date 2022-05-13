@@ -2,7 +2,7 @@ import React from 'react';
 import './index.css';
 import { Routes, Route, Link } from 'react-router-dom';
 import Courses from './components/Courses';
-
+import CourseDetail from './components/CourseDetail';
 
 function App() {
   // const { courses } = useContext(AppContext)
@@ -12,7 +12,8 @@ function App() {
   return (
       <React.Fragment>
         <Routes>
-          <Route exact path='/' element={<Courses />}></Route>
+          <Route path='/' element={ <Courses /> }></Route>
+            <Route path= '/courses/:id' index element={ <CourseDetail /> }></Route>
         </Routes>       
       </React.Fragment>
   );

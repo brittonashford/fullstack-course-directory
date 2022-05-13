@@ -12,7 +12,8 @@ export const Provider = (props) => {
     return (
         
         <AppContext.Provider value={{
-            placeholder
+            //create, update, delete course functions
+            //create user, sign in, sign out
 
         }}>
             { props.children }

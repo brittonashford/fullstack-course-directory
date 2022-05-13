@@ -3,13 +3,12 @@ import React from 'react';
 
 export default UpdateCourse = () => {
 
-    //TODO: use map() to iterate through courses and create <CourseDetail> component for each
     return(
         <React.Fragment>
-            <div class="wrap">
+            <div className="wrap">
                 <h2>Update Course</h2>
                 <form>
-                    <div class="React.Fragment--flex">
+                    <div className="React.Fragment--flex">
                         <div>
                             <label for="courseTitle">Course Title</label>
                             <input id="courseTitle" name="courseTitle" type="text" value="Build a Basic Bookcase"/>
@@ -27,7 +26,7 @@ export default UpdateCourse = () => {
                             <textarea id="materialsNeeded" name="materialsNeeded">* 1/2 x 3/4 inch parting strip&#13;&#13;* 1 x 2 common pine&#13;&#13;* 1 x 4 common pine&#13;&#13;* 1 x 10 common pine&#13;&#13;* 1/4 inch thick lauan plywood&#13;&#13;* Finishing Nails&#13;&#13;* Sandpaper&#13;&#13;* Wood Glue&#13;&#13;* Wood Filler&#13;&#13;* Minwax Oil Based Polyurethane</textarea>
                         </div>
                     </div>
-                    <button class="button" type="submit">Update Course</button><button class="button button-secondary" onclick="event.preventDefault(); location.href='index.html';">Cancel</button>
+                    <button className="button" type="submit">Update Course</button><button className="button button-secondary" onclick="event.preventDefault(); location.href='index.html';">Cancel</button>
                 </form>
             </div>
         </React.Fragment>
