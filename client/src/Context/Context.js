@@ -1,22 +1,26 @@
-import React from 'react';
-// import Data from './Data';
-
-
+import React, { useState, useEffect} from 'react';
+import axios from 'axios';
 
 export const AppContext = React.createContext();
-
 export const Provider = (props) => {
-    let placeholder = "I moved all my API stuff to Data.js and now I'm not sure what to put here lol...";
 
+    const [ courseList, setCourseList ] = useState(["nothing yet"]);
+
+    const getCourseList = async () => {
+        await axios('http://localhost:5000/api/courses')
+        .then( response => setCourseList(response.data) )
+        .then( response => console.log("Context.js:  ", response.data) )
+        .catch( error => console.log(error.message) ) 
+    };
+
+    useEffect( () => { getCourseList() }, []);
     
     return (
         
-        <AppContext.Provider value={{
-            //create, update, delete course functions
-            //create user, sign in, sign out
-
-        }}>
+        <AppContext.Provider value={{ courseList }}>
             { props.children }
         </AppContext.Provider>
     );
 };
+
+

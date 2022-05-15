@@ -7,22 +7,32 @@ import Header from './Header';
 
 function CourseDetail() {
 
+
+
     const { id } = useParams();
 
     // create and update course in state
-    const [course, setCourse ] = useState({});
+    const [ course, setCourse ] = useState({});
+    const [ isLoading, setIsLoading ] = useState(false);
 
+    
     // get course data from API
-    useEffect = ( () => {
+    useEffect( () => {
         const getCourseDetail = async() => {
             await axios(`http://localhost:5000/api/courses/${id}`)
+                .then (console.log(`Id is: ${id}`))
                 .then(response => console.log(response))
                 .then( response => setCourse(response.data) )
                 .catch( error => console.log(error.message) )
-        };
+        }
+        
+        getCourseDetail()
+            .then (console.log(`Id is: ${id}`))
+            .then(response => console.log(response))
+            .then( response => setCourse(response.data) )
+            .catch( error => console.log(error.message) )
 
-        getCourseDetail();
-    }, [course]);
+    }, []);
 
 
     return(
