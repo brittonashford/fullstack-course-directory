@@ -1,8 +1,8 @@
 import React from 'react';
 import './index.css';
 import { Routes, Route, Link } from 'react-router-dom';
-import Courses from './components/Courses';
-import CourseDetail from './components/CourseDetail';
+import Courses from './Components/Courses';
+import CourseDetail from './Components/CourseDetail';
 
 function App() {
   // const { courses } = useContext(AppContext)

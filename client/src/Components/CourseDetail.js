@@ -1,38 +1,30 @@
-import React, {useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import Header from './Header';
-// access create new course, delete, and update functions w/ useContext?
-
+import { AppContext } from '../Context/Context';
 
 function CourseDetail() {
-
-
 
     const { id } = useParams();
 
     // create and update course in state
     const [ course, setCourse ] = useState({});
     const [ isLoading, setIsLoading ] = useState(false);
+    const appContext = useContext(AppContext);
 
-    
+
     // get course data from API
     useEffect( () => {
-        const getCourseDetail = async() => {
-            await axios(`http://localhost:5000/api/courses/${id}`)
-                .then (console.log(`Id is: ${id}`))
-                .then(response => console.log(response))
-                .then( response => setCourse(response.data) )
-                .catch( error => console.log(error.message) )
-        }
-        
-        getCourseDetail()
-            .then (console.log(`Id is: ${id}`))
+        appContext.getCourseDetail(id)
+            .then(console.log("appContext.getCourseDetail() call from CourseDetail.js useEffect. response:"))
             .then(response => console.log(response))
-            .then( response => setCourse(response.data) )
+            .then(response => setCourse(response.data) )
+            .then(console.log("setCourse from CourseDetail.js useEffect. result:"))
+            .then(console.log(course))
             .catch( error => console.log(error.message) )
 
-    }, []);
+    }, );
 
 
     return(
