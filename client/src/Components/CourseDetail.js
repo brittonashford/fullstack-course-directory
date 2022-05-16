@@ -8,24 +8,22 @@ function CourseDetail() {
 
     const { id } = useParams();
 
-    // create and update course in state
+
+    //create and update course in state
     const [ course, setCourse ] = useState({});
-    const [ isLoading, setIsLoading ] = useState(false);
-    const appContext = useContext(AppContext);
 
-
-    // get course data from API
+    
+    //get course data from API
     useEffect( () => {
-        appContext.getCourseDetail(id)
-            .then(console.log("appContext.getCourseDetail() call from CourseDetail.js useEffect. response:"))
-            .then(response => console.log(response))
-            .then(response => setCourse(response.data) )
-            .then(console.log("setCourse from CourseDetail.js useEffect. result:"))
-            .then(console.log(course))
-            .catch( error => console.log(error.message) )
+        const getCourseDetail = async (id) => {
+            await axios(`http://localhost:5000/api/courses/${id}`)
+                .then( response => console.log("data comes through here...", response) )
+                .then( response => setCourse(response.data) )
+                .catch( error => console.log(error.message) )
+        };
 
-    }, );
-
+        getCourseDetail(id);
+    }, []);
 
     return(
         <React.Fragment>

@@ -5,8 +5,6 @@ import Courses from './Components/Courses';
 import CourseDetail from './Components/CourseDetail';
 
 function App() {
-  // const { courses } = useContext(AppContext)
-
 
   //note: <Provider> wraps <App> in index.js, so context is available here
   return (
