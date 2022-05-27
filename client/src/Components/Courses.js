@@ -19,7 +19,7 @@ function Courses() {
 
     return(
         <React.Fragment>
-            <Header />
+            {/* <Header /> */}
             <div className="wrap main--grid">
                 {
                     courseList.map((course, index) =>

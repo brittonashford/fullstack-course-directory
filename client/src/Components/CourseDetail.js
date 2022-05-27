@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Header from './Header';
 import { AppContext } from '../Context';
+import ReactMarkdown from 'react-markdown';
 
 function CourseDetail() {
 
@@ -22,7 +23,7 @@ function CourseDetail() {
 
     return(
         <React.Fragment>
-            <Header />
+            {/* <Header /> */}
             <div className="actions--bar">
                 <div className="wrap">
                     <Link to={"/"} className="button">Update Course</Link>
@@ -38,26 +39,14 @@ function CourseDetail() {
                         <div>
                             <h3 className="course--detail--title">Course</h3>
                             <h4 className="course--name">{course.title}</h4>
-                            <p>{course.description}</p>
+                            <ReactMarkdown>{course.description}</ReactMarkdown>
                         </div>
                         <div>
                             <h3 className="course--detail--title">Estimated Time</h3>
                             <p>{course.estimatedTime}</p>
 
                             <h3 className="course--detail--title">Materials Needed</h3>
-                            <p>{course.materialsNeeded}</p>
-                            {/* <ul className="course--detail--list">
-                                <li>1/2 x 3/4 inch parting strip</li>
-                                <li>1 x 2 common pine</li>
-                                <li>1 x 4 common pine</li>
-                                <li>1 x 10 common pine</li>
-                                <li>1/4 inch thick lauan plywood</li>
-                                <li>Finishing Nails</li>
-                                <li>Sandpaper</li>
-                                <li>Wood Glue</li>
-                                <li>Wood Filler</li>
-                                <li>Minwax Oil Based Polyurethane</li>
-                            </ul> */}
+                            <ReactMarkdown>{course.materialsNeeded}</ReactMarkdown>
                         </div>
                     </div>
                 </form>
