@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown';
 
 function CourseDetail() {
 
-    const { data } = useContext(AppContext)
+    const { data } = useContext(AppContext);
     const { id } = useParams();
 
     //create and update course in state

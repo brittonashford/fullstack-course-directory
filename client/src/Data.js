@@ -46,6 +46,17 @@ export default class Data {
         }
     }
 
+    //create new user
+    createUser = async(user) => {
+        console.log('createUser API call hit');
+        const response = await this.api(`users`, 'POST', user)
+        if (response.status === 201) {
+            console.log('createUser POST request succeeded! check user data in DB:');
+            console.log(user);
+        } else {
+            console.log(`createUser API call failed. Response status: ${response.status}`);
+        }
+    }
 
 
     //create new course
@@ -65,7 +76,7 @@ export default class Data {
 
 
 
-    //create new user
+    
 
 
 
