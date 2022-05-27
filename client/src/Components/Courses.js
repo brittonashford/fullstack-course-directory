@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Header from './Header';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../Context';
 
@@ -19,7 +18,6 @@ function Courses() {
 
     return(
         <React.Fragment>
-            {/* <Header /> */}
             <div className="wrap main--grid">
                 {
                     courseList.map((course, index) =>

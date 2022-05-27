@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Header from './Header';
 import { AppContext } from '../Context';
 import ReactMarkdown from 'react-markdown';
 
@@ -12,7 +11,6 @@ function CourseDetail() {
     //create and update course in state
     const [ course, setCourse ] = useState({});
 
-
     //get course detail using async funtion from context
     useEffect( () => {
         console.log('Hello from CourseDetail.js');
@@ -23,7 +21,6 @@ function CourseDetail() {
 
     return(
         <React.Fragment>
-            {/* <Header /> */}
             <div className="actions--bar">
                 <div className="wrap">
                     <Link to={"/"} className="button">Update Course</Link>

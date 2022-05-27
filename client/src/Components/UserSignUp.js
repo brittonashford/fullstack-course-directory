@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-
 function UserSignUp() {
 
     return(
@@ -25,4 +24,4 @@ function UserSignUp() {
     );
 };
 
-export default UserSignUp
+export default UserSignUp;
