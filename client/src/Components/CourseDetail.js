@@ -1,12 +1,11 @@
 import React, {useState, useEffect, useContext } from 'react';
-import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import Header from './Header';
 import { AppContext } from '../Context';
 
 function CourseDetail() {
 
-    const { Data } = useContext(AppContext)
+    const { data } = useContext(AppContext)
     const { id } = useParams();
 
     //create and update course in state
@@ -16,22 +15,10 @@ function CourseDetail() {
     //get course detail using async funtion from context
     useEffect( () => {
         console.log('Hello from CourseDetail.js');
-        Data.getCourseDetail(id)
-            .then( response => setCourse(response.data) )
+        data.getCourseDetail(id)
+            .then( response => setCourse(response) )
             .catch( error => console.log(error.message) )
-    }, Data)
-
-    // //get course data from API
-    // useEffect( () => {
-    //     const getCourseDetail = async (id) => {
-    //         await axios(`http://localhost:5000/api/courses/${id}`)
-    //             .then( response => console.log("data comes through here...", response.data) )
-    //             .then( response => setCourse(response.data) )
-    //             .catch( error => console.log(error.message) )
-    //     };
-
-    //     getCourseDetail(id);
-    // }, []);
+    }, [])
 
     return(
         <React.Fragment>

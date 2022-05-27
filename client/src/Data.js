@@ -22,11 +22,12 @@ export default class Data {
 
     //get course list
     getCourseList = async() => {
-        console.log('Data.getCourseList called via Context via Data.js. Did it return data?')
+        console.log('getCourseList() called via Data() instance in context. Did it return data?')
         const response = await this.api('/courses')
         if (response.status === 200) {
             console.log('getCourseList API call succeeded! Results:');
             console.log(response.data);
+            return response.data;
         } else {
             console.log(`getCourseList API call failed. Response status: ${response.status}`);
         }
@@ -34,7 +35,7 @@ export default class Data {
 
     //get course detail
     getCourseDetail = async(id) => {
-        console.log('Data.getCourseDetail called via Context via Data.js. Did it return data?')
+        console.log('getCourseDetail() called via Data() instance in context. Did it return data?')
         const response = await this.api(`/courses/${id}`);
         if (response.status === 200) {
             console.log('getCourseDetail API call succeeded! Results:');

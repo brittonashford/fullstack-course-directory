@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-// import axios from 'axios';
 import Header from './Header';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../Context';
@@ -7,16 +6,16 @@ import { AppContext } from '../Context';
 function Courses() {
    //stores and updates the course list in state
     const [ courseList, setCourseList ] = useState([]);
-    const { Data } = useContext(AppContext);
+    const { data } = useContext(AppContext);
 
 
     //get course list
     useEffect( () => {
-        Data.getCourseList()
+        data.getCourseList()
             .then(console.log('Hello from Courses.js'))
-            .then( response => setCourseList(response.data) )
+            .then( response => setCourseList(response) )
             .catch( error => console.log(error.message) )
-    }, [Data])
+    }, [])
 
     return(
         <React.Fragment>
