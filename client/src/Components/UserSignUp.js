@@ -15,15 +15,23 @@ function UserSignUp() {
     const handleChange = (e) => {
         e.persist();
         console.log(e.target.name, e.target.value);
-        const updateProperty = e.target.name;     
-        setUser(user => ({...user, [updateProperty]: e.target.value}));
+        setUser(user => ({...user, [e.target.name]: e.target.value}));
         console.log(user);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(user);
         data.createUser(user)
-            .then(console.log('createUser request successful!'))
+            //no news is good news (201 status)
+            .then( response => {
+                if (!response) {
+                    console.log('createUser request successful! Check the database.');
+                } else {
+                    console.log(`createUser request was not successful:(.`, response );
+                }
+            })
+            .catch( error => console.log(error) );
     }
 
     // const handleCancel = (e) => {
@@ -37,13 +45,13 @@ function UserSignUp() {
                 <h2>Sign Up</h2>               
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="firstName">First Name</label>
-                    <input id="firstName" name="firstName" type="text" value="" onChange={handleChange} />
+                    <input id="firstName" name="firstName" type="text" value={user.firstName} onChange={handleChange} />
                     <label htmlFor="lastName">Last Name</label>
-                    <input id="lastName" name="lastName" type="text" value="" onChange={handleChange} />
+                    <input id="lastName" name="lastName" type="text" value={user.lastName} onChange={handleChange} />
                     <label htmlFor="emailAddress">Email Address</label>
-                    <input id="emailAddress" name="emailAddress" type="email" value="" onChange={handleChange} />
+                    <input id="emailAddress" name="emailAddress" type="email" value={user.emailAddress} onChange={handleChange} />
                     <label htmlFor="password">Password</label>
-                    <input id="password" name="password" type="password" value="" onChange={handleChange} />
+                    <input id="password" name="password" type="password" value={user.password} onChange={handleChange} />
                     <button className="button" type="submit">Sign Up</button><Link to='/' className="button button-secondary">Cancel</Link>
                 </form>
                 <p>Already have a user account? Click here to <Link to='/sign-in'>sign in</Link>!</p>

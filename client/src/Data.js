@@ -51,7 +51,7 @@ export default class Data {
         console.log('createUser API call hit');
         const response = await this.api(`users`, 'POST', user)
         if (response.status === 201) {
-            console.log('createUser POST request succeeded! check user data in DB:');
+            console.log(`createUser POST request succeeded! Response status: ${response.status}`);
             console.log(user);
         } else {
             console.log(`createUser API call failed. Response status: ${response.status}`);
