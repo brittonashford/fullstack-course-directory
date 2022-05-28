@@ -13,7 +13,11 @@ function UserSignUp() {
 
     //event handlers
     const handleChange = (e) => {
-        console.log(e.target);
+        e.persist();
+        console.log(e.target.name, e.target.value);
+        const updateProperty = e.target.name;     
+        setUser(user => ({...user, [updateProperty]: e.target.value}));
+        console.log(user);
     }
 
     const handleSubmit = (e) => {
@@ -32,13 +36,13 @@ function UserSignUp() {
             <div className="form--centered">
                 <h2>Sign Up</h2>               
                 <form onSubmit={handleSubmit}>
-                    <label for="firstName">First Name</label>
+                    <label htmlFor="firstName">First Name</label>
                     <input id="firstName" name="firstName" type="text" value="" onChange={handleChange} />
-                    <label for="lastName">Last Name</label>
+                    <label htmlFor="lastName">Last Name</label>
                     <input id="lastName" name="lastName" type="text" value="" onChange={handleChange} />
-                    <label for="emailAddress">Email Address</label>
+                    <label htmlFor="emailAddress">Email Address</label>
                     <input id="emailAddress" name="emailAddress" type="email" value="" onChange={handleChange} />
-                    <label for="password">Password</label>
+                    <label htmlFor="password">Password</label>
                     <input id="password" name="password" type="password" value="" onChange={handleChange} />
                     <button className="button" type="submit">Sign Up</button><Link to='/' className="button button-secondary">Cancel</Link>
                 </form>
