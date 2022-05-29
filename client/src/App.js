@@ -5,6 +5,7 @@ import Courses from './Components/Courses';
 import CourseDetail from './Components/CourseDetail';
 import UserSignIn from './Components/UserSignIn';
 import UserSignUp from './Components/UserSignUp';
+import UserSignOut from './Components/UserSignOut';
 import Header from './Components/Header';
 
 
@@ -18,6 +19,7 @@ function App() {
             <Routes>
                 <Route path='sign-in' element={ <UserSignIn /> } />
                 <Route path='sign-up' element={ <UserSignUp /> } />
+                {/* <Route path='signout' element={ <UserSignOut /> } /> */}
                 <Route path='/' element={ <Courses /> } />
                     <Route path='courses/:id' index element={ <CourseDetail /> } />
             </Routes>       
