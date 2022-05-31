@@ -3,11 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AppContext } from '../Context';
 
 function UserSignIn() {
+
     //store credentials in state
     const [ credentials, setCredentials ] = useState({
         emailAddress: '',
         password: ''
     });
+
+    const [ errors, setErrors ] = useState([]);
 
     const { data } = useContext(AppContext);
     const navigate = useNavigate();
@@ -21,16 +24,20 @@ function UserSignIn() {
     }
 
     const handleSubmit = (e) => {
+        console.log('UserSignIn.handleSubmit() hit', credentials);
         e.preventDefault(); 
         data.getUser(credentials.emailAddress, credentials.password)
-            .then( response => {
-                console.log('success!', response);
-                navigate('/');
+            .then( (user) => {
+                if (user === null) {
+                    console.log('Sign in unsuccessful.');
+                    setErrors(['Sign in unsuccessful.']);
+                } else {
+                    console.log('Sign in successful.');
+                    navigate('/');
+                }
             })
             .catch( error => console.log('nope:(', error))
-        //redirect user to home page
-        
-
+            //navigate to error page   
     }
 
     return (

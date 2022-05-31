@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppContext } from '../Context';
 
 function UserSignUp() {
@@ -11,9 +11,11 @@ function UserSignUp() {
         password: ''
     });
 
+    const [ errors, setErrors ] = useState([]);
+
     //react router's useNavigate can handle things that history.push, etc. used to due in older approaches
     //https://www.geeksforgeeks.org/reactjs-usenavigate-hook/
-
+    const navigate = useNavigate();
 
     //event handlers
     const handleChange = (e) => {
@@ -29,17 +31,22 @@ function UserSignUp() {
         console.log(user);
         data.createUser(user)
             //no news is good news (201 status)
-            .then( response => {
-                if (!response) {
-                    console.log('createUser request successful! Check the database.');
-
-                    //sign user in and return to home screen if successful
-                    signIn(user.emailAddress, user.password);
-                } else {
-                    console.log(`createUser request was not successful:(.`, response );
+            //if something is returned it will be an error
+            .then( errors => {
+                if (errors.length) {
+                    console.log('error(s) occurred in createUser()');
+                    setErrors(errors);
+                } else { 
+                    //no errors and no response means success?
+                    //I can't even hit this...  
+                    console.log('then() else clause... why is this not getting hit?');                     
                 }
             })
-            .catch( error => console.log(error) );
+            .catch( error => {throw new Error(error) });
+
+        console.log('outside of promise function chain... why is this not getting hit?');
+        signIn(user.emailAddress, user.password);
+
     }
 
     return(

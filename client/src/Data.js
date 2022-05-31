@@ -1,8 +1,11 @@
 
+import React, { useContext } from 'react';
 import { Buffer } from 'buffer';
 import config from './config';
+// import { AppContext } from './Context';
 
 export default class Data {
+
 
     api(path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
         const url = config.apiBaseUrl + path;
@@ -26,7 +29,8 @@ export default class Data {
             options.headers['Authorization'] = `Basic ${encodedCredentials}`;
         }
         return fetch(url, options);
-      }
+    }
+
 
     //get course list
     getCourseList = async() => {
@@ -59,11 +63,14 @@ export default class Data {
 
     //create new user
     createUser = async(user) => {
+        //this seems to break things.
+        // const { signIn } = useContext(AppContext);
         console.log('Data.createUser() hit');
         const response = await this.api(`/users`, 'POST', user);
         if (response.status === 201) {
             console.log(`createUser POST request succeeded! Response status: ${response.status}`);
             console.log(user, response.data);
+            // signIn(user.emailAddress, user.password);
             return [];
         } else if (response.status === 400) {
             console.log(`response status: ${response.status}`)
@@ -109,18 +116,5 @@ export default class Data {
 
 
 
-
-    
-
-
-
-
-
-    //get user
-
-
-
-
-  
 
 }
