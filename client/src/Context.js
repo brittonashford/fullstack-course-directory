@@ -20,7 +20,10 @@ export const Provider = (props) => {
 
     //sign in
     const signIn = async(emailAddress, password) => {
+        //not hitting this......???
         console.log('Context.signIn() hit');
+
+        
         // const user = await data.getUser(emailAddress, password);
         // if (user) {        
         //     setAuthUser(user); //delete?

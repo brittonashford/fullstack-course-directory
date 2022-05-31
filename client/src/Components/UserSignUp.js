@@ -45,7 +45,7 @@ function UserSignUp() {
             .catch( error => {throw new Error(error) });
 
         console.log('outside of promise function chain... why is this not getting hit?');
-        signIn(user.emailAddress, user.password);
+        signIn(user.emailAddress, user.password); //not getting hit :/
 
     }
 
