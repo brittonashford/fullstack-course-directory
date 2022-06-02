@@ -1,8 +1,8 @@
 
-import React, { useContext } from 'react';
+import React from 'react';
 import { Buffer } from 'buffer';
 import config from './config';
-// import { AppContext } from './Context';
+
 
 export default class Data {
 
@@ -22,10 +22,13 @@ export default class Data {
         }
     
         if (requiresAuth) {    
-            //btoa is outdated/deprecated... installed buffer to handle base64
+            //btoa is appears to be deprecated... installed buffer to handle base64
             //"For code running using Node.js APIs, converting between base64-encoded strings and binary
             // data should be performed using Buffer.from(str, 'base64') andbuf.toString('base64')."
-            const encodedCredentials = Buffer.from(`${credentials.emailAddress}:${credentials.password}`).toString('base64');
+
+            // const encodedCredentials = Buffer.from(`${credentials.emailAddress}:${credentials.password}`).toString('base64');
+            
+            const encodedCredentials = btoa(`${credentials.username}:${credentials.password}`);
             options.headers['Authorization'] = `Basic ${encodedCredentials}`;
         }
         return fetch(url, options);
@@ -63,14 +66,11 @@ export default class Data {
 
     //create new user
     createUser = async(user) => {
-        //this seems to break things.
-        // const { signIn } = useContext(AppContext);
         console.log('Data.createUser() hit');
         const response = await this.api(`/users`, 'POST', user);
         if (response.status === 201) {
             console.log(`createUser POST request succeeded! Response status: ${response.status}`);
             console.log(user, response.data);
-            // signIn(user.emailAddress, user.password);
             return [];
         } else if (response.status === 400) {
             console.log(`response status: ${response.status}`)

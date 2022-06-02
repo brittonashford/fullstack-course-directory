@@ -27,6 +27,7 @@ function UserSignUp() {
     }
 
     const handleSubmit = (e) => {
+        e.preventDefault();
         console.log('handleSubmit hit');
         console.log(user);
         data.createUser(user)
@@ -37,16 +38,15 @@ function UserSignUp() {
                     console.log('error(s) occurred in createUser()');
                     setErrors(errors);
                 } else { 
-                    //no errors and no response means success?
-                    //I can't even hit this...  
-                    console.log('then() else clause... why is this not getting hit?');                     
+                    //no errors and no response means success
+                    console.log('createUser() was successful. Sign them in...');  
+                    signIn(user.emailAddress, user.password);                   
                 }
             })
             .catch( error => {throw new Error(error) });
 
-        console.log('outside of promise function chain... why is this not getting hit?');
-        signIn(user.emailAddress, user.password); //not getting hit :/
-
+        
+         
     }
 
     return(

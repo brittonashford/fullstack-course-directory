@@ -20,18 +20,18 @@ export const Provider = (props) => {
 
     //sign in
     const signIn = async(emailAddress, password) => {
-        //not hitting this......???
-        console.log('Context.signIn() hit');
 
-        
-        // const user = await data.getUser(emailAddress, password);
-        // if (user) {        
-        //     setAuthUser(user); //delete?
-        //     Cookies.set('userCookie', user, options);
-        //     console.log('signIn() called. user set in state:', authUser);
-        // } else {
-        //     console.log('no user found for: ', emailAddress, password);
-        // }
+        console.log(`Context.signIn() hit. trying to getuser()... email: ${emailAddress}, password: ${password}`);
+
+        const user = await data.getUser(emailAddress, password);
+        if (user) {     
+            console.log('getUser() returned...', user);   
+            // setAuthUser(user); //delete?
+            // Cookies.set('userCookie', user, options);
+            // console.log('signIn() called. user set in state:', authUser);
+        } else {
+            console.log('no user found for: ', emailAddress, password);
+        }
     }
 
     //sign out
