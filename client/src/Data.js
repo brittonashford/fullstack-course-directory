@@ -21,13 +21,17 @@ export default class Data {
         }
     
         if (requiresAuth) {    
-            //when using axios, VSC says that btoa is deprecated... installed buffer to handle base64
-            //"For code running using Node.js APIs, converting between base64-encoded strings and binary
-            // data should be performed using Buffer.from(str, 'base64') andbuf.toString('base64')."
+            //VSC says that btoa is deprecated:
+            // This function is only provided for compatibility with legacy web platform APIs and 
+            // should never be used in new code, because they use strings to represent binary data 
+            // and predate the introduction of typed arrays in JavaScript. For code running using 
+            // Node.js APIs, converting between base64-encoded strings and binary data should be 
+            // performed using Buffer.from(str, 'base64') andbuf.toString('base64').
 
-            // const encodedCredentials = Buffer.from(`${credentials.emailAddress}:${credentials.password}`).toString('base64');
             console.log(credentials);
-            const encodedCredentials = btoa(`${credentials.emailAddress}:${credentials.password}`);
+            const encodedCredentials = Buffer.from(`${credentials.emailAddress}:${credentials.password}`).toString('base64');
+            // console.log(credentials);
+            // const encodedCredentials = btoa(`${credentials.emailAddress}:${credentials.password}`);
             console.log(encodedCredentials);
             options.headers['Authorization'] = `Basic ${encodedCredentials}`;
         }
