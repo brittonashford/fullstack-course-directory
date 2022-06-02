@@ -6,7 +6,6 @@ import config from './config';
 
 export default class Data {
 
-
     api(path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
         const url = config.apiBaseUrl + path;
       
@@ -22,13 +21,14 @@ export default class Data {
         }
     
         if (requiresAuth) {    
-            //btoa is appears to be deprecated... installed buffer to handle base64
+            //when using axios, VSC says that btoa is deprecated... installed buffer to handle base64
             //"For code running using Node.js APIs, converting between base64-encoded strings and binary
             // data should be performed using Buffer.from(str, 'base64') andbuf.toString('base64')."
 
             // const encodedCredentials = Buffer.from(`${credentials.emailAddress}:${credentials.password}`).toString('base64');
-            
-            const encodedCredentials = btoa(`${credentials.username}:${credentials.password}`);
+            console.log(credentials);
+            const encodedCredentials = btoa(`${credentials.emailAddress}:${credentials.password}`);
+            console.log(encodedCredentials);
             options.headers['Authorization'] = `Basic ${encodedCredentials}`;
         }
         return fetch(url, options);
