@@ -6,10 +6,12 @@ import Cookies from 'js-cookie';
 export const AppContext = React.createContext();
 
 export const Provider = (props) => {
-    //state
-    //not sure if I really need both of these....
-    const [ authUser, setAuthUser ] = useState(null);  //delete?
-    const authUserCookie = Cookies.set('userCookie', null);
+    //state  
+    // const authUserCookie = Cookies.get('authUser');
+    // const [ authUser, setAuthUser ] = useState(authUserCookie ? JSON.parse(authUserCookie) : null);
+
+    //simplified version for testing
+    const [ authUser, setAuthUser ] = useState(null);
 
     // instance of Data() for Provider to share with its children
     const data = new Data();
@@ -20,18 +22,22 @@ export const Provider = (props) => {
 
     //sign in
     const signIn = async(emailAddress, password) => {
+        console.log('Context.signIn() hit');
 
-        console.log(`Context.signIn() hit. trying to getuser()... email: ${emailAddress}, password: ${password}`);
+        const user = await data.getUser(emailAddress, password)
 
-        const user = await data.getUser(emailAddress, password);
-        if (user) {     
+        if (user !== null) {     
             console.log('getUser() returned...', user);   
-            // setAuthUser(user); //delete?
-            // Cookies.set('userCookie', user, options);
-            // console.log('signIn() called. user set in state:', authUser);
+            user.password = password;
+            setAuthUser(user); //***authUser not getting set... user obj has data
+            console.log('setAuthUser() called. user object in state set to:', authUser);
+            // Cookies.set('userCookie', JSON.stringify(user), options);           
+            // console.log('cookie set: ', authUserCookie);
+            return authUser;
         } else {
             console.log('no user found for: ', emailAddress, password);
-        }
+            return;
+        }        
     }
 
     //sign out

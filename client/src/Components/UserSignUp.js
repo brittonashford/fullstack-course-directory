@@ -22,7 +22,6 @@ function UserSignUp() {
         //.persist() prevents event properties from getting reset.
         //https://reactjs.org/docs/legacy-event-pooling.html
         e.persist();
-        console.log(e.target.name, e.target.value);
         setUser(user => ({...user, [e.target.name]: e.target.value}));
     }
 

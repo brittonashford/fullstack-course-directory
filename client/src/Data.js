@@ -88,11 +88,11 @@ export default class Data {
 
     //get user
     getUser = async(emailAddress, password) => {
-        console.log('Data.getUser() hit. Did it return data?');
+        console.log('Data.getUser() hit.');
         const response = await this.api('/users', 'GET', null, true, { emailAddress, password });
 
         if (response.status === 200) {
-            console.log('sign-in successful!');
+            console.log('getUser() successful!');
             return response.json().then(data => data);
         } else if (response.status === 401) {
             console.log('user not found.', emailAddress, password);
