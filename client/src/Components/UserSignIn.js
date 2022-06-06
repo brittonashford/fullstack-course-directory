@@ -11,7 +11,8 @@ function UserSignIn() {
     });
 
     const [ errors, setErrors ] = useState([]);
-    const { data } = useContext(AppContext);
+    
+    const context = useContext(AppContext);
     const navigate = useNavigate();
 
     //event handlers
@@ -25,7 +26,7 @@ function UserSignIn() {
     const handleSubmit = (e) => {
         console.log('UserSignIn.handleSubmit() hit', credentials);
         e.preventDefault(); 
-        data.getUser(credentials.emailAddress, credentials.password)
+        context.signIn(credentials.emailAddress, credentials.password)
             .then( (user) => {
                 if (user === null) {
                     console.log('Sign in unsuccessful.');
