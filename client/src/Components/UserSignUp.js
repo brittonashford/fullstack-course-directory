@@ -4,7 +4,7 @@ import { AppContext } from '../Context';
 
 function UserSignUp() {
     const { data, signIn } = useContext(AppContext);
-    const [user, setUser] = useState({
+    const [newUser, setNewUser] = useState({
         firstName: '',
         lastName: '',
         emailAddress: '',
@@ -22,24 +22,24 @@ function UserSignUp() {
         //.persist() prevents event properties from getting reset.
         //https://reactjs.org/docs/legacy-event-pooling.html
         e.persist();
-        setUser(user => ({...user, [e.target.name]: e.target.value}));
+        setNewUser(user => ({...newUser, [e.target.name]: e.target.value}));
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('handleSubmit hit');
-        console.log(user);
-        data.createUser(user)
+        console.log(newUser);
+        data.createUser(newUser)
             //no news is good news (201 status)
             //if something is returned it will be an error
             .then( errors => {
                 if (errors.length) {
-                    console.log('error(s) occurred in createUser()');
+                    console.log('error(s) occurred in createNewUser()');
                     setErrors(errors);
                 } else { 
                     //no errors and no response means success
-                    console.log('createUser() was successful. Sign them in...');  
-                    signIn(user.emailAddress, user.password);                   
+                    console.log('createNewUser() was successful. Sign them in...');  
+                    signIn(newUser.emailAddress, newUser.password);                   
                 }
             })
             .catch( error => {throw new Error(error) });
@@ -58,28 +58,28 @@ function UserSignUp() {
                         id="firstName" 
                         name="firstName" 
                         type="text" 
-                        value={user.firstName} 
+                        value={newUser.firstName} 
                         onChange={handleChange} />
                     <label htmlFor="lastName">Last Name</label>
                     <input 
                         id="lastName" 
                         name="lastName" 
                         type="text" 
-                        value={user.lastName} 
+                        value={newUser.lastName} 
                         onChange={handleChange} />
                     <label htmlFor="emailAddress">Email Address</label>
                     <input 
                         id="emailAddress" 
                         name="emailAddress" 
                         type="email" 
-                        value={user.emailAddress} 
+                        value={newUser.emailAddress} 
                         onChange={handleChange} />
                     <label htmlFor="password">Password</label>
                     <input 
                         id="password" 
                         name="password" 
                         type="password" 
-                        value={user.password} 
+                        value={newUser.password} 
                         onChange={handleChange} />
                     <button className="button" type="submit">Sign Up</button>
                     <Link to='/' className="button button-secondary">Cancel</Link>

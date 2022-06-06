@@ -7,11 +7,11 @@ export const AppContext = React.createContext();
 
 export const Provider = (props) => {
     //state  
-    // const authUserCookie = Cookies.get('authUser');
-    // const [ authUser, setAuthUser ] = useState(authUserCookie ? JSON.parse(authUserCookie) : null);
+    let authUserCookie = Cookies.set('authUserCookie', null);
+    const [ authUser, setAuthUser ] = useState(authUserCookie ? JSON.parse(authUserCookie) : null);
 
     //simplified version for testing
-    const [ authUser, setAuthUser ] = useState(null);
+    // const [ authUser, setAuthUser ] = useState(null);
 
     // instance of Data() for Provider to share with its children
     const data = new Data();
@@ -31,7 +31,7 @@ export const Provider = (props) => {
             user.password = password;
             setAuthUser(user); //***authUser not getting set... user obj has data
             console.log('setAuthUser() called. user object in state set to:', authUser);
-            // Cookies.set('userCookie', JSON.stringify(user), options);           
+            Cookies.set('authUserCookie', JSON.stringify(user), options);           
             // console.log('cookie set: ', authUserCookie);
             return authUser;
         } else {
