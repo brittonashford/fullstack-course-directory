@@ -39,14 +39,13 @@ function UserSignUp() {
                     setErrors(errors);
                 } else { 
                     //no errors and no response means success
-                    console.log('createNewUser() was successful. Sign them in...');  
-                    context.signIn(newUser.emailAddress, newUser.password);                   
-                }
+                    console.log('createNewUser() was successful.');  
+                    context.signIn(newUser.emailAddress, newUser.password)
+                        .then(() => navigate('/'));                         
+                }                   
             })
+            //TODO: add error handling
             .catch( error => {throw new Error(error) });
-
-        
-         
     }
 
     return(

@@ -19,7 +19,7 @@ function App() {
             <Routes>
                 <Route path='sign-in' element={ <UserSignIn /> } />
                 <Route path='sign-up' element={ <UserSignUp /> } />
-                {/* <Route path='signout' element={ <UserSignOut /> } /> */}
+                <Route path='sign-out' element={ <UserSignOut /> } /> 
                 <Route path='/' element={ <Courses /> } />
                     <Route path='courses/:id' index element={ <CourseDetail /> } />
             </Routes>       

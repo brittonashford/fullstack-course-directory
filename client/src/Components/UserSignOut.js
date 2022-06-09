@@ -1,10 +1,18 @@
-// import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../Context';
+import { useNavigate } from 'react-router-dom';
 
-// export default UserSignOut = () => {
+function UserSignOut() {
+    const { signOut } = useContext(AppContext);
+    const navigate = useNavigate();
+    signOut();
+    navigate('/');
 
-//     return(
-//         <React.Fragment>
-//             {/* sign user out and redirect to course catalog */}
-//         </React.Fragment>
-//     );
-// };
+    return(
+        <React.Fragment>
+            {/* sign user out and redirect to course catalog */}
+        </React.Fragment>
+    );
+};
+
+export default UserSignOut;
