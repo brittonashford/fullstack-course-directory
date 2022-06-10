@@ -3,7 +3,6 @@ import React from 'react';
 import { Buffer } from 'buffer';
 import config from './config';
 
-
 export default class Data {
 
     api(path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
@@ -30,8 +29,7 @@ export default class Data {
 
             console.log(credentials);
             const encodedCredentials = Buffer.from(`${credentials.emailAddress}:${credentials.password}`).toString('base64');
-            // console.log(credentials);
-            // const encodedCredentials = btoa(`${credentials.emailAddress}:${credentials.password}`);
+
             console.log(encodedCredentials);
             options.headers['Authorization'] = `Basic ${encodedCredentials}`;
         }
@@ -43,7 +41,7 @@ export default class Data {
     getCourseList = async() => {
         console.log('Data.getCourseList() hit. Did it return data?')
         const response = await this.api('/courses')
-        console.log(response);
+
         if (response.status === 200) {
             console.log('getCourseList API call succeeded! Results:');
             console.log(response.data);
@@ -58,6 +56,7 @@ export default class Data {
     getCourseDetail = async(id) => {
         console.log('Data.getCourseDetail() hit. Did it return data?')
         const response = await this.api(`/courses/${id}`);
+
         if (response.status === 200) {
             console.log('getCourseDetail API call succeeded! Results:');
             console.log(response.data);
@@ -72,6 +71,7 @@ export default class Data {
     createUser = async(user) => {
         console.log('Data.createUser() hit');
         const response = await this.api(`/users`, 'POST', user);
+
         if (response.status === 201) {
             console.log(`createUser POST request succeeded! Response status: ${response.status}`);
             console.log(user, response.data);

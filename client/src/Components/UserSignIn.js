@@ -11,32 +11,32 @@ function UserSignIn() {
     });
 
     const [ errors, setErrors ] = useState([]);
-    
-    const context = useContext(AppContext);
+
+    const { signIn } = useContext(AppContext);
     const navigate = useNavigate();
 
     //event handlers
     const handleChange = (e) => {
         e.preventDefault();
         e.persist()
-        console.log(e.target.name, e.target.value);
         setCredentials( credentials => ({...credentials, [e.target.name]: e.target.value}));
     }
 
     const handleSubmit = (e) => {
         console.log('UserSignIn.handleSubmit() hit', credentials);
         e.preventDefault(); 
-        context.signIn(credentials.emailAddress, credentials.password)
-            .then( (user) => {
-                if (user === null) {
-                    console.log('Sign in unsuccessful.');
-                    setErrors(['Sign in unsuccessful.']);
-                } else {
-                    console.log('Sign in successful.');
-                    navigate('/');
-                }
-            })
-            .catch( error => console.log('nope:(', error))
+        signIn(credentials.emailAddress, credentials.password)
+            // .then( (user) => {
+            //     if (user === null) {
+            //         console.log('Sign in unsuccessful.');
+            //         setErrors(['Sign in unsuccessful.']);
+            //     } else {
+            //         console.log('Sign in successful.');
+            //         navigate('/');
+            //     }
+            // })
+            navigate('/');
+            // .catch( error => console.log('nope:(', error))
             //navigate to error page   
     }
 

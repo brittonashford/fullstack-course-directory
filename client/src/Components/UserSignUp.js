@@ -11,7 +11,7 @@ function UserSignUp() {
         password: ''
     });
 
-    const context = useContext(AppContext);
+    // const context = useContext(AppContext);
     const [ errors, setErrors ] = useState([]);
 
     //react router's useNavigate can handle things that history.push, etc. used to due in older approaches
@@ -40,7 +40,7 @@ function UserSignUp() {
                 } else { 
                     //no errors and no response means success
                     console.log('createNewUser() was successful.');  
-                    context.signIn(newUser.emailAddress, newUser.password)                
+                    signIn(newUser.emailAddress, newUser.password)                
                 }                   
             })  
             .then( () => navigate('/'))         
