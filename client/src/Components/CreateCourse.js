@@ -1,7 +1,28 @@
-import React from 'react';
+import React, { useState, useContext} from 'react';
 import { Link } from 'react-router-dom';
+import { AppContext } from '../Context'
 
 function CreateCourse(){
+
+    const { authUser, Data } = useContext(AppContext);
+    const [ newCourseData, setNewCourseData ] = useState({
+        courseTitle: null,
+        courseDescription: null,
+        estimatedTime: null,
+        materialsNeeded: null,
+        userId: null
+    });
+    const [ errors, setErrors ] = useState([]);
+
+    //event handlers
+    const handleChange = (e) => {
+        e.persist();
+        setNewCourseData(newCourseData => ({...newCourseData, [e.target.name]: e.target.value}));
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    }
 
     return(
         <React.Fragment>
@@ -18,19 +39,19 @@ function CreateCourse(){
                     <div className="main--flex">
                         <div>
                             <label htmlFor="courseTitle">Course Title</label>
-                            <input id="courseTitle" name="courseTitle" type="text" value=""/>
+                            <input id="courseTitle" name="courseTitle" type="text" value={newCourseData.courseTitle} onChange={handleChange} />
 
-                            <p>By Joe Smith</p>
+                            <p>By {authUser.firstName} {authUser.lastName}</p>
 
                             <label htmlFor="courseDescription">Course Description</label>
-                            <textarea id="courseDescription" name="courseDescription"></textarea>
+                            <textarea id="courseDescription" name="courseDescription" value={newCourseData.courseDescription} onChange={handleChange}></textarea>
                         </div>
                         <div>
                             <label htmlFor="estimatedTime">Estimated Time</label>
-                            <input id="estimatedTime" name="estimatedTime" type="text" value=""/>
+                            <input id="estimatedTime" name="estimatedTime" type="text" value={newCourseData.estimatedTime} onChange={handleChange} />
 
                             <label htmlFor="materialsNeeded">Materials Needed</label>
-                            <textarea id="materialsNeeded" name="materialsNeeded"></textarea>
+                            <textarea id="materialsNeeded" name="materialsNeeded" value={newCourseData.materialsNeeded} onChange={handleChange}></textarea>
                         </div>
                     </div>
                     <button className="button" type="submit">Create Course</button><Link className="button button-secondary" to='/' >Cancel</Link>
