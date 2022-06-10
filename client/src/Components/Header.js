@@ -13,8 +13,8 @@ function Header() {
                     {authUser ? (
                         <React.Fragment>
                             <ul className="header--signedin">
-                                <span>Welcome, {authUser.firstName}!</span>
-                                <NavLink to='sign-out'>Sign Out</NavLink>
+                                <li><span>Welcome, {authUser.firstName}!</span></li>
+                                <li><NavLink to='sign-out'>Sign Out</NavLink></li>
                             </ul>
                         </React.Fragment>
                     ) : (

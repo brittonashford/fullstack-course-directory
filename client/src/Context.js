@@ -30,7 +30,7 @@ export const Provider = (props) => {
         if (user !== null) {     
             console.log('getUser() returned...', user);   
             user.password = password;
-            setAuthUser(user); 
+            setAuthUser(user);           
             return authUser;
         } else {
             console.log('no user found for: ', emailAddress, password);

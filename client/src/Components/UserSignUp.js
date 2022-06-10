@@ -40,11 +40,10 @@ function UserSignUp() {
                 } else { 
                     //no errors and no response means success
                     console.log('createNewUser() was successful.');  
-                    context.signIn(newUser.emailAddress, newUser.password)
-                        .then(() => navigate('/'));                         
+                    context.signIn(newUser.emailAddress, newUser.password)                
                 }                   
-            })
-            //TODO: add error handling
+            })  
+            .then( () => navigate('/'))         
             .catch( error => {throw new Error(error) });
     }
 

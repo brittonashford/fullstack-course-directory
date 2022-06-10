@@ -7,6 +7,8 @@ import UserSignIn from './Components/UserSignIn';
 import UserSignUp from './Components/UserSignUp';
 import UserSignOut from './Components/UserSignOut';
 import Header from './Components/Header';
+import AuthRoute from './Components/AuthRoute';
+import CreateCourse from './Components/CreateCourse';
 
 
 function App() {
@@ -22,6 +24,9 @@ function App() {
                 <Route path='sign-out' element={ <UserSignOut /> } /> 
                 <Route path='/' element={ <Courses /> } />
                     <Route path='courses/:id' index element={ <CourseDetail /> } />
+                    <Route path='courses/create' element={ <AuthRoute /> }>
+                        <Route index element= { <CreateCourse /> } />
+                    </Route> 
             </Routes>       
         </React.Fragment>
     );

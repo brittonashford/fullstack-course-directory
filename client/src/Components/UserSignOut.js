@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 function UserSignOut() {
     const { signOut } = useContext(AppContext);
     const navigate = useNavigate();
+    
     signOut();
     navigate('/');
 
