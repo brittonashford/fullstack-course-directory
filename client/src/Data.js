@@ -39,7 +39,7 @@ export default class Data {
 
     //get course list
     getCourseList = async() => {
-        console.log('Data.getCourseList() hit. Did it return data?')
+        console.log('Data.getCourseList() hit.')
         const response = await this.api('/courses')
 
         if (response.status === 200) {
@@ -54,7 +54,7 @@ export default class Data {
 
     //get course detail
     getCourseDetail = async(id) => {
-        console.log('Data.getCourseDetail() hit. Did it return data?')
+        console.log('Data.getCourseDetail() hit.')
         const response = await this.api(`/courses/${id}`);
 
         if (response.status === 200) {
@@ -69,7 +69,7 @@ export default class Data {
 
     //create new user
     createUser = async(user) => {
-        console.log('Data.createUser() hit');
+        console.log('Data.createUser() hit.');
         const response = await this.api(`/users`, 'POST', user);
 
         if (response.status === 201) {
@@ -105,7 +105,24 @@ export default class Data {
 
 
     //create new course
+    createCourse =async(newCourseData, authUser) => {
+        console.log('createCourse() hit.');
+        const { emailAddress, password } = authUser;
 
+        const response = await this.api('/courses', 'POST', newCourseData, true, { emailAddress, password });
+        
+        if(response.status === 201) {
+            console.log('response status 201 = success:)');
+            return[];
+        } else if (response.status === 400) {
+            console.log('400 status = bad request. check that data...', response);
+            return response.json().then(data => {return data});
+        } else {
+            //add error handling
+            throw new Error();
+        }
+    
+    }
 
 
 

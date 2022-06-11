@@ -1,18 +1,20 @@
 import React, { useState, useContext} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppContext } from '../Context'
 
 function CreateCourse(){
 
-    const { authUser, Data } = useContext(AppContext);
+    const { authUser, data } = useContext(AppContext);
     const [ newCourseData, setNewCourseData ] = useState({
-        courseTitle: null,
-        courseDescription: null,
+        title: null,
+        description: "",
         estimatedTime: null,
-        materialsNeeded: null,
-        userId: null
+        materialsNeeded: "",
+        userId: authUser.id
     });
     const [ errors, setErrors ] = useState([]);
+
+    const navigate = useNavigate();
 
     //event handlers
     const handleChange = (e) => {
@@ -22,6 +24,19 @@ function CreateCourse(){
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log('calling create course with newCourseData: ', newCourseData);
+        console.log('calling create course with authUser: ', authUser);
+
+        data.createCourse(newCourseData, authUser)
+            .then( errors => {
+                if (errors) {
+                    console.log('error(s) occurred: ', errors);
+                } else {
+                    console.log('createCourse() was successful!');
+                }
+            })
+            .then( () => navigate('/'))         
+            .catch( error => {throw new Error(error) });
     }
 
     return(
@@ -38,13 +53,13 @@ function CreateCourse(){
                 <form>
                     <div className="main--flex">
                         <div>
-                            <label htmlFor="courseTitle">Course Title</label>
-                            <input id="courseTitle" name="courseTitle" type="text" value={newCourseData.courseTitle} onChange={handleChange} />
+                            <label htmlFor="title">Course Title</label>
+                            <input id="title" name="title" type="text" value={newCourseData.title} onChange={handleChange} />
 
                             <p>By {authUser.firstName} {authUser.lastName}</p>
 
-                            <label htmlFor="courseDescription">Course Description</label>
-                            <textarea id="courseDescription" name="courseDescription" value={newCourseData.courseDescription} onChange={handleChange}></textarea>
+                            <label htmlFor="description">Course Description</label>
+                            <textarea id="description" name="description" value={newCourseData.description} onChange={handleChange}></textarea>
                         </div>
                         <div>
                             <label htmlFor="estimatedTime">Estimated Time</label>
@@ -54,7 +69,7 @@ function CreateCourse(){
                             <textarea id="materialsNeeded" name="materialsNeeded" value={newCourseData.materialsNeeded} onChange={handleChange}></textarea>
                         </div>
                     </div>
-                    <button className="button" type="submit">Create Course</button><Link className="button button-secondary" to='/' >Cancel</Link>
+                    <button className="button" type="submit" onClick={handleSubmit}>Create Course</button><Link className="button button-secondary" to='/' >Cancel</Link>
                 </form>
             </div>
         </React.Fragment>

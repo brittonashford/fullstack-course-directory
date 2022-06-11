@@ -11,7 +11,6 @@ function Courses() {
     //get course list
     useEffect( () => {
         data.getCourseList()
-            .then(console.log('Hello from Courses.js'))
             .then( response => setCourseList(response) )
             .catch( error => console.log(error.message) )
     }, [])
