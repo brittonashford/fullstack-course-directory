@@ -26,18 +26,18 @@ function UserSignIn() {
         console.log('UserSignIn.handleSubmit() hit', credentials);
         e.preventDefault(); 
         signIn(credentials.emailAddress, credentials.password)
-            // .then( (user) => {
-            //     if (user === null) {
-            //         console.log('Sign in unsuccessful.');
-            //         setErrors(['Sign in unsuccessful.']);
-            //     } else {
-            //         console.log('Sign in successful.');
-            //         navigate('/');
-            //     }
-            // })
-            navigate('/');
-            // .catch( error => console.log('nope:(', error))
-            //navigate to error page   
+            .then( (user) => {
+                if (user === null) {
+                    console.log('Sign in unsuccessful.');
+                    setErrors(['Sign in unsuccessful.']);
+                } else {
+                    console.log('Sign in successful.');
+                    navigate('/');
+                }
+            })
+            .then(navigate('/'))
+            .catch( error => console.log('nope:(', error));
+            // navigate to error page   
     }
 
     return (
