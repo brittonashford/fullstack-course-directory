@@ -23,7 +23,7 @@ function CourseDetail() {
         <React.Fragment>
             <div className="actions--bar">
                 <div className="wrap">
-                    <Link to={"/"} className="button">Update Course</Link>
+                    <Link to={"/update"} className="button">Update Course</Link>
                     <Link to={"/"} className="button">Delete Course</Link>
                     <Link to={"/"} className="button button-secondary">Return to List</Link>
                 </div>

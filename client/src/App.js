@@ -26,6 +26,9 @@ function App() {
                     <Route path='courses/:id' index element={ <CourseDetail /> } />
                     <Route path='courses/create' element={ <AuthRoute /> }>
                         <Route index element= { <CreateCourse /> } />
+                    </Route>
+                    <Route path='courses/update' element={ <AuthRoute /> }>
+                        <Route index element= { <UpdateCourse /> } />
                     </Route> 
             </Routes>       
         </React.Fragment>
