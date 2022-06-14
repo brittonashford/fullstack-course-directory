@@ -1,17 +1,20 @@
 import React, {useState, useEffect, useContext } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { AppContext } from '../Context';
 import ReactMarkdown from 'react-markdown';
 
 function CourseDetail() {
 
-    const { data } = useContext(AppContext);
-    const { id } = useParams();
-
-    //create and update course in state
+    //state
     const [ course, setCourse ] = useState({});
+    const [ canChange, setCanChange ] = useState(false);
 
-    //get course detail using async funtion from context
+    const { data, authUser } = useContext(AppContext);
+    const { id } = useParams();
+    const navigate = useNavigate();
+    
+
+    //get course details
     useEffect( () => {
         console.log('Hello from CourseDetail.js');
         data.getCourseDetail(id)
@@ -19,13 +22,38 @@ function CourseDetail() {
             .catch( error => console.log(error.message) )
     }, [])
 
+    //determine if user should be allowed to update/delete course
+    useEffect( () => {
+        if(course && authUser && course.userId === authUser.id){
+            setCanChange(true);
+            console.log('canChange = true');
+        } else {
+            setCanChange(false);
+            console.log('canChange = false');
+        }
+    }, [course, authUser])
+
+    //event handlers
+    const handleUpdate = (e) => {
+        navigate('update');
+    }
+
+    const handleDelete = (e) => {
+        console.log('z');
+    }
+
     return(
         <React.Fragment>
             <div className="actions--bar">
                 <div className="wrap">
-                    <Link to={"/update"} className="button">Update Course</Link>
-                    <Link to={"/"} className="button">Delete Course</Link>
-                    <Link to={"/"} className="button button-secondary">Return to List</Link>
+                {canChange ? (
+                    <React.Fragment>
+                        <button className="button" onClick={handleUpdate}>Update Course</button>
+                        <button className="button" onClick={handleDelete}>Delete Course</button> 
+                    </React.Fragment>) 
+                    : (<React.Fragment></React.Fragment>)
+                }
+                    <Link to={'/'} className="button button-secondary">Return to List</Link>
                 </div>
             </div>
               

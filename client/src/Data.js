@@ -5,7 +5,7 @@ import config from './config';
 
 export default class Data {
 
-    api(path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
+     api(path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
         const url = config.apiBaseUrl + path;
       
         const options = {
@@ -36,7 +36,6 @@ export default class Data {
         return fetch(url, options);
     }
 
-
     //get course list
     getCourseList = async() => {
         console.log('Data.getCourseList() hit.')
@@ -58,8 +57,7 @@ export default class Data {
         const response = await this.api(`/courses/${id}`);
 
         if (response.status === 200) {
-            console.log('getCourseDetail API call succeeded! Results:');
-            console.log(response.data);
+            console.log('getCourseDetail API call succeeded!');
             return response.json().then(data => data);
         } else {
             console.log(`getCourseDetail API call failed. Response status: ${response.status}`);
@@ -105,8 +103,8 @@ export default class Data {
 
 
     //create new course
-    createCourse =async(newCourseData, authUser) => {
-        console.log('createCourse() hit.');
+    createCourse = async(newCourseData, authUser) => {
+        console.log('Data.createCourse() hit.');
         const { emailAddress, password } = authUser;
 
         const response = await this.api('/courses', 'POST', newCourseData, true, { emailAddress, password });
@@ -125,10 +123,24 @@ export default class Data {
     }
 
 
-
-
     //update course
+    updateCourse = async(updatedCourseData, authUser) => {
+        console.log('d\Data.updateCourse() hit.');
+        const { emailAddress, password } = authUser;
 
+        const response = await this.api(`/courses/${updatedCourseData.id}`, 'PUT', updatedCourseData, true, { emailAddress, password });
+        
+        if(response.status === 204){
+            console.log('204 response stauts means success:)');
+            return [];
+        } else if (response.status === 401){
+            console.log('401 response status means forbidden');
+            return response.json().then(data => {return data});
+        } else if (response.status === 404) {
+            console.log('404 response status means not found');
+            throw new Error();
+        }
+    }
 
 
 

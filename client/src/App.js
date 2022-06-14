@@ -9,6 +9,7 @@ import UserSignOut from './Components/UserSignOut';
 import Header from './Components/Header';
 import AuthRoute from './Components/AuthRoute';
 import CreateCourse from './Components/CreateCourse';
+import UpdateCourse from './Components/UpdateCourse';
 
 
 function App() {
@@ -23,13 +24,13 @@ function App() {
                 <Route path='sign-up' element={ <UserSignUp /> } />
                 <Route path='sign-out' element={ <UserSignOut /> } /> 
                 <Route path='/' element={ <Courses /> } />
-                    <Route path='courses/:id' index element={ <CourseDetail /> } />
+                    <Route path='courses/:id' index element={ <CourseDetail /> } />                
+                    <Route path='courses/:id/update' element={ <AuthRoute /> }>
+                        <Route index element= { <UpdateCourse /> } />
+                    </Route> 
                     <Route path='courses/create' element={ <AuthRoute /> }>
                         <Route index element= { <CreateCourse /> } />
                     </Route>
-                    <Route path='courses/update' element={ <AuthRoute /> }>
-                        <Route index element= { <UpdateCourse /> } />
-                    </Route> 
             </Routes>       
         </React.Fragment>
     );

@@ -9,7 +9,7 @@ export const Provider = (props) => {
     //state  
     const [ authUser, setAuthUser ] = useState(null);
     const [ authUserCookie, setAuthUserCookie ] = useState(Cookies.set('authUserCookie', null));
-    
+
     useEffect( () => {
         if(authUser) {
             Cookies.set('authUserCookie', JSON.stringify(authUser), {expires: 1})
