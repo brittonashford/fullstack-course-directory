@@ -4,11 +4,12 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 
 
 function UpdateCourse(){
+    //state
     const[ updatedCourseData, setUpdatedCourseData ] = useState({});
 
-    const { authUser, data } = useContext(AppContext);
-    const navigate = useNavigate();
+    const { authUser, data } = useContext(AppContext); 
     const { id } = useParams();
+    const navigate = useNavigate();
 
     //pre-pop course details
     useEffect( () => {
@@ -17,10 +18,6 @@ function UpdateCourse(){
             .then( response => setUpdatedCourseData(response) )
             .catch( error => console.log(error.message) )
     }, [])
-
-
-
-
 
 
     //event handlers
