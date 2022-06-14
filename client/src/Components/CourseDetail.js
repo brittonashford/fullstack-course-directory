@@ -39,7 +39,16 @@ function CourseDetail() {
     }
 
     const handleDelete = (e) => {
-        console.log('z');
+        data.deleteCourse(course.id, authUser)
+            .then( errors => {
+                if (errors) {
+                    console.log('error(s) occurred: ', errors);
+                } else {
+                    console.log('deleteCourse() was successful!');
+                }
+            })
+            .then( () => navigate('/'))         
+            .catch( error => {throw new Error(error) });
     }
 
     return(

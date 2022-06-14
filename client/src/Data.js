@@ -146,8 +146,18 @@ export default class Data {
 
 
     //delete course
+    deleteCourse = async(courseId, authUser) => {
+        console.log('Data.deleteCourse() hit.');
+        const { emailAddress, password } = authUser;
 
-
-
+        const response = await(this.api(`courses/${courseId}`, 'DELETE', null, true, { emailAddress, password }));
+        if(response.status === 204){
+            console.log('204 response stauts means success:)');
+            return [];
+        } else if (response.status === 403) {
+            console.log('403 means access denied.');
+            return response.json().then(data => {return data});
+        }
+    }
 
 }
