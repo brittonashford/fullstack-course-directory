@@ -16,6 +16,8 @@ function CreateCourse(){
 
     const navigate = useNavigate();
 
+    let allowSubmit = false;
+
     //event handlers
     const handleChange = (e) => {
         e.persist();
@@ -32,17 +34,16 @@ function CreateCourse(){
                 if (errors.length) {
                     setValidationErrors(errors);
                     console.log('error(s) occurred: ', errors);
-                    return;
+                    allowSubmit = false;
                 } else {
                     console.log('createCourse() was successful!');
+                    allowSubmit = true;
                 }
             })
             .then( () => {
-                if(validationErrors.length === 0){
+                if(allowSubmit){
                     navigate('/');
-                } else {
-                    return;
-                }
+                } 
             })  
             .catch( error => {
                 console.log('error caught: ', error);
