@@ -18,6 +18,8 @@ function UserSignUp() {
     //https://www.geeksforgeeks.org/reactjs-usenavigate-hook/
     const navigate = useNavigate();
 
+    let allowSubmit = false;
+    
     //event handlers
     const handleChange = (e) => {
         //.persist() prevents event properties from getting reset.
@@ -37,15 +39,25 @@ function UserSignUp() {
                 if (errors.length) {
                     console.log('error(s) occurred in createNewUser()');
                     setErrors(errors);
+                    allowSubmit = false;
                 } else { 
                     //no errors and no response means success
-                    console.log('createNewUser() was successful.');  
+                    console.log('createNewUser() was successful.'); 
+                    allowSubmit = true; 
                     signIn(newUser.emailAddress, newUser.password)                
                 }                   
             })  
-            .then( () => navigate('/'))         
-            .catch( error => {throw new Error(error) });
+            .then( () => {
+                if(allowSubmit){
+                    navigate('/');
+                } 
+            })          
+            .catch( error => {
+                console.log('error caught: ', error);
+                navigate('/error');
+            });
     }
+    
 
     return(
         <React.Fragment>
