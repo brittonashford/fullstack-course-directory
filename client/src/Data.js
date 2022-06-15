@@ -101,7 +101,6 @@ export default class Data {
             }
     }
 
-
     //create new course
     createCourse = async(newCourseData, authUser) => {
         console.log('Data.createCourse() hit.');
@@ -114,18 +113,16 @@ export default class Data {
             return[];
         } else if (response.status === 400) {
             console.log('400 status = bad request. check that data...', response);
-            return response.json().then(data => {return data});
+            return response.json().then(data => { return data.errors; });
         } else {
-            //add error handling
             throw new Error();
         }
     
     }
 
-
     //update course
     updateCourse = async(updatedCourseData, authUser) => {
-        console.log('d\Data.updateCourse() hit.');
+        console.log('Data.updateCourse() hit.');
         const { emailAddress, password } = authUser;
 
         const response = await this.api(`/courses/${updatedCourseData.id}`, 'PUT', updatedCourseData, true, { emailAddress, password });
@@ -141,9 +138,6 @@ export default class Data {
             throw new Error();
         }
     }
-
-
-
 
     //delete course
     deleteCourse = async(courseId, authUser) => {

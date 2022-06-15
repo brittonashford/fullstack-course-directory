@@ -2,7 +2,6 @@ import React from 'react';
 
 export default Error = () => {
 
-
     return(
         <React.Fragment>
             <div className="wrap">

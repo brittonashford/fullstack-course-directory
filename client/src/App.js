@@ -10,6 +10,7 @@ import Header from './Components/Header';
 import AuthRoute from './Components/AuthRoute';
 import CreateCourse from './Components/CreateCourse';
 import UpdateCourse from './Components/UpdateCourse';
+import Error from './Components/UpdateCourse';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                     <Route path='courses/create' element={ <AuthRoute /> }>
                         <Route index element= { <CreateCourse /> } />
                     </Route>
+                <Route path='error' element= { <Error /> } />
             </Routes>       
         </React.Fragment>
     );

@@ -12,7 +12,7 @@ function CreateCourse(){
         materialsNeeded: "",
         userId: authUser.id
     });
-    const [ errors, setErrors ] = useState([]);
+    const [ validationErrors, setValidationErrors ] = useState([]);
 
     const navigate = useNavigate();
 
@@ -28,29 +28,48 @@ function CreateCourse(){
         console.log('calling create course with authUser: ', authUser);
 
         data.createCourse(newCourseData, authUser)
-            .then( errors => {
-                if (errors) {
+            .then( errors => {               
+                if (errors.length) {
+                    setValidationErrors(errors);
                     console.log('error(s) occurred: ', errors);
+                    return;
                 } else {
                     console.log('createCourse() was successful!');
                 }
             })
-            .then( () => navigate('/'))         
-            .catch( error => {throw new Error(error) });
+            .then( () => {
+                if(validationErrors.length === 0){
+                    navigate('/');
+                } else {
+                    return;
+                }
+            })  
+            .catch( error => {
+                console.log('error caught: ', error);
+                navigate('/error');
+            });
     }
 
     return(
         <React.Fragment>
             <div className="wrap">
                 <h2>Create Course</h2>
-                <div className="validation--errors">
-                    <h3>Validation Errors</h3>
-                    <ul>
-                        <li>Please provide a value for "Title"</li>
-                        <li>Please provide a value for "Description"</li>
-                    </ul>
-                </div>
-                <form>
+                {validationErrors.length ? (
+                    <React.Fragment>
+                        <div className="validation--errors">
+                            <h3>Validation Errors</h3>
+                            <ul>
+                                {validationErrors.map( (error, index) => (
+                                    <li key={index}>{error}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    </React.Fragment>
+                ) : (
+                    <React.Fragment></React.Fragment>
+                )}
+                
+                <form onSubmit={handleSubmit}>
                     <div className="main--flex">
                         <div>
                             <label htmlFor="title">Course Title</label>
@@ -69,7 +88,7 @@ function CreateCourse(){
                             <textarea id="materialsNeeded" name="materialsNeeded" value={newCourseData.materialsNeeded} onChange={handleChange}></textarea>
                         </div>
                     </div>
-                    <button className="button" type="submit" onClick={handleSubmit}>Create Course</button><Link className="button button-secondary" to='/' >Cancel</Link>
+                    <button className="button" type="submit">Create Course</button><Link className="button button-secondary" to='/' >Cancel</Link>
                 </form>
             </div>
         </React.Fragment>

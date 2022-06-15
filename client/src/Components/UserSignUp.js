@@ -50,7 +50,21 @@ function UserSignUp() {
     return(
         <React.Fragment>
             <div className="form--centered">
-                <h2>Sign Up</h2>               
+                <h2>Sign Up</h2>     
+                {errors.length ? (
+                    <React.Fragment>
+                        <div className="validation--errors">
+                            <h3>Validation Errors</h3>
+                            <ul>
+                                {errors.map( (error, index) => (
+                                    <li key={index}>{error}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    </React.Fragment>
+                ) : (
+                    <React.Fragment></React.Fragment>
+                )}           
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="firstName">First Name</label>
                     <input 
