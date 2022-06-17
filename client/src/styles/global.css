@@ -4,6 +4,8 @@
 }
 html {
     font-size: 1.25em;
+    height: 100% !important;
+    background-color: #d0d5d8;
 }
 body {
     font-family: 'Work Sans', sans-serif;
@@ -20,8 +22,11 @@ p {
     hyphens: auto;
 }
 a {
-    color: #939;
+    color: #32373b;
     text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
 }
 .wrap {
     max-width: 1250px;
@@ -29,7 +34,7 @@ a {
     padding: 0 1rem;
 }
 header {
-    background: #57496e;
+    background: #2f3e46;
     color: #fff;
     padding: 1rem 0;
     margin-bottom: 2rem;
@@ -43,11 +48,11 @@ header {
     font-size: 1.25rem;
     color: #fff;
 }
-header li {
-    font-size: .8rem;
+.header--logo a:hover {
+    text-decoration: none;
 }
 header nav a {
-    color: #dbd;
+    color: #fff;
 }
 header nav a:hover {
     color: #fff;
@@ -62,26 +67,28 @@ header nav a:hover {
     margin-left: .5rem;
 }
 .course--module {
-    background: #7c689b;
+    background: #FFF;
     border-radius: .5rem;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
     display: block;
+    border: 1px solid #354f52;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 50%);
 }
 .course--label {
-    color: #fff;
+    color: #32373b;
     font-size: .9rem;
     font-weight: 400;
     margin-bottom: .25rem;
 }
 .course--title {
-    color: #fff;
+    color: #32373b;
     font-weight: 700;
     font-size: 1.25rem;
 }
 .course--add--module {
-    background: #ddd9e4;
-    color: #57496e;
+    background: #6b7a82;
+    color: #FFF;
     font-weight: 300;
     font-size: 1.25rem;
 }
@@ -89,7 +96,10 @@ header nav a:hover {
     width: 20px;
     height: auto;
     margin-right: 5px;
-    fill: #57496e;
+    fill: #FFF;
+}
+.course--detail--label {
+    color: #32373b;
 }
 .course--detail--title {
     padding-bottom: .25rem;
@@ -104,7 +114,7 @@ header nav a:hover {
     font-size: 2rem;
     margin-bottom: .5rem;
     font-weight: 700;
-    color: #47395e;
+    color: #32373b;
 }
 .course--detail--list {
     font-weight: 300;
@@ -112,7 +122,7 @@ header nav a:hover {
     line-height: 1.5;
 }
 .actions--bar {
-    background: #e9e5f0;
+    background: #62747D;
     padding: 1rem 0;
     margin: -2rem 0 2rem;
 }
@@ -157,7 +167,7 @@ input, textarea {
     width: 100%;
     color: #332a40;
     border-radius: .5rem;
-    border: 1px solid #8c789b;
+    border: 1px solid #354f52;
     padding: .5rem;
     margin-bottom: 1rem;
     font-family: 'Work Sans', sans-serif;
@@ -167,7 +177,7 @@ textarea {
     min-height: 300px;
 }
 .button {
-    background: #7c689b;
+    background: #354f52;
     color: #fff;
     font-size: 1rem;
     padding: .75rem 1.5rem;
@@ -184,25 +194,32 @@ textarea {
     margin-bottom: 0;
 }
 .button:not(.button-secondary):hover {
-    background: #63537d;
+    background: #465963;
     cursor: pointer;
 }
 .button-secondary {
-    color: #7c689b;
-    background: none;
-    box-shadow: 0 0 0 2px #7c689b inset;
+    color: #465963;
+    background: #d0d5d8;
+    box-shadow: 0 0 0 2px #2F3E46 inset;
     transition: box-shadow 0.2s, color 0.2s;
 }
 .button-secondary:hover {
-    color: #63537d;
-    box-shadow: 0 0 0 2px #63537d inset;
+    color: #2f3e46;
+    box-shadow: 0 0 0 2px #2f3e46 inset;
     cursor: pointer;
 }
 input:focus, button:focus, .button:focus, textarea:focus {
     border: none;
     border-radius: 0;
-    outline: 2px solid #332a40;
+    outline: 2px solid #465963;
 }
+.sign--up--link:hover{
+    text-decoration: underline;
+}
+.sign--up--link{
+    color: #465963;
+}
+
 
 @media screen and (min-width: 600px) {
     .header--signedin li {

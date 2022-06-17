@@ -67,7 +67,7 @@ function UserSignIn() {
                     <button className="button" type="submit">Sign In</button>
                     <Link to='/' className="button button-secondary" >Cancel</Link>
                 </form>
-                <p>Don't have a user account? Click here to <Link to='/sign-up'>sign up</Link>!</p>               
+                <p>Don't have a user account? Click here to <Link to='/sign-up' className="sign--up--link">sign up</Link>!</p>               
             </div>
         </React.Fragment>
     );
