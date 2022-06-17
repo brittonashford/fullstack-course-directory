@@ -11,6 +11,8 @@ import AuthRoute from './Components/AuthRoute';
 import CreateCourse from './Components/CreateCourse';
 import UpdateCourse from './Components/UpdateCourse';
 import Error from './Components/UpdateCourse';
+import NotFound from './Components/NotFound';
+import Forbidden from './Components/Forbidden';
 
 
 function App() {
@@ -27,12 +29,14 @@ function App() {
                 <Route path='/' element={ <Courses /> } />
                     <Route path='courses/:id' index element={ <CourseDetail /> } />                
                     <Route path='courses/:id/update' element={ <AuthRoute /> }>
-                        <Route index element= { <UpdateCourse /> } />
+                        <Route index element={ <UpdateCourse /> } />
                     </Route> 
                     <Route path='courses/create' element={ <AuthRoute /> }>
-                        <Route index element= { <CreateCourse /> } />
+                        <Route index element={ <CreateCourse /> } />
                     </Route>
-                <Route path='error' element= { <Error /> } />
+                <Route path='error' element={ <Error /> } />
+                <Route path='forbidden' element={ <Forbidden /> } />
+                <Route path='*' element={ <NotFound /> } />
             </Routes>       
         </React.Fragment>
     );

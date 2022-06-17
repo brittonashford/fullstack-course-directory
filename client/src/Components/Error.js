@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default Error = () => {
+export default function Error(){
 
     return(
         <React.Fragment>

@@ -21,6 +21,8 @@ export const Provider = (props) => {
     // instance of Data() for Provider to share with its children
     const data = new Data();
 
+    let nextStop = 'Courses';
+
     //sign in
     const signIn = async(emailAddress, password) => {
         console.log('Context.signIn() hit');
@@ -46,7 +48,7 @@ export const Provider = (props) => {
     
 
     return (
-        <AppContext.Provider value={{ data, signIn, signOut, authUser }}>
+        <AppContext.Provider value={{ data, signIn, signOut, authUser, nextStop }}>
             { props.children }
         </AppContext.Provider>
     );

@@ -12,7 +12,7 @@ function UserSignIn() {
 
     const [ errors, setErrors ] = useState([]);
 
-    const { signIn } = useContext(AppContext);
+    const { signIn, nextStop } = useContext(AppContext);
     const navigate = useNavigate();
 
     //event handlers
@@ -35,9 +35,14 @@ function UserSignIn() {
                     navigate('/');
                 }
             })
-            .then(navigate('/'))
-            .catch( error => console.log('nope:(', error));
-            // navigate to error page   
+            .then( () => {
+                if(nextStop === 'Courses'){
+                    navigate('/');
+                } else if (nextStop === 'CreateCourse'){
+                    navigate('/courses/create');
+                }
+            })
+            .catch( error => console.log('nope:(', error));  
     }
 
     return (
