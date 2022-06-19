@@ -18,7 +18,7 @@ function Courses() {
     //event handler
     const setNextStop = () => {
         console.log('nextStep event handler hit');
-        nextStop = 'CreateCourse';
+        setNextStop('CreateCourse');
     }
 
     return(
