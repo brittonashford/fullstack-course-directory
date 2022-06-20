@@ -89,16 +89,20 @@ export default class Data {
         console.log('Data.getUser() hit.');
         const response = await this.api('/users', 'GET', null, true, { emailAddress, password });
 
+        //no news is good news
         if (response.status === 200) {
             console.log('getUser() successful!');
             return response.json().then(data => data);
-        } else if (response.status === 401) {
-            console.log('user not found.', emailAddress, password);
-            return null;
+        //else handle not found, forbidden, and server error
+        } else if (response.status === 400 || response.status === 401 || response.status === 500) {
+            console.log('getUser() errored using params: .', emailAddress, password);
+            return response.json()
+                .then( data => {return data.errors});
+        //just in case something weird happens
         } else {
             console.log(response.status);
             throw new Error();
-            }
+        }
     }
 
     //create new course

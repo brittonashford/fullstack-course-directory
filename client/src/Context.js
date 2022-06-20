@@ -6,16 +6,20 @@ import Cookies from 'js-cookie';
 export const AppContext = React.createContext();
 
 export const Provider = (props) => {
+
+
     //state  
     const [ authUserCookie, setAuthUserCookie ]  = useState(Cookies.get('authUserCookie')); 
     const [ authUser, setAuthUser ] = useState(authUserCookie ? JSON.parse(authUserCookie) : null);
-    const [ nextStop, setNextStop ] = useState(
-        nextStop !== null ?
-            nextStop
-            :
-            'Courses'
-        );
-    
+    // const [ nextStop, setNextStop ] = useState(prevState => {
+    //     if(!prevState){
+    //         debugger;
+    //         return 'CreateCourse';
+    //     } else {
+    //         debugger;
+    //         return prevState;
+    //     }
+    // });
 
     //set cookie once authUser is set
     useEffect( () => {
@@ -23,7 +27,7 @@ export const Provider = (props) => {
             Cookies.set('authUserCookie', JSON.stringify(authUser), {expires: 1})
          } else {
             console.log('authUser is null. nothing to set...');
-         } 
+         }         
     }, [authUser])
 
     //instance of Data() for Provider to share with its children
@@ -54,7 +58,7 @@ export const Provider = (props) => {
     
 
     return (
-        <AppContext.Provider value={{ data, signIn, signOut, authUser, nextStop }}>
+        <AppContext.Provider value={{ data, signIn, signOut, authUser }}>
             { props.children }
         </AppContext.Provider>
     );

@@ -220,7 +220,32 @@ input:focus, button:focus, .button:focus, textarea:focus {
     color: #465963;
 }
 
+/* Validation */
+.not-valid {
+    position: relative;
+    border: 2px solid #800;
+  }
 
+.not-valid-label {
+position: relative;
+color: #800;
+}
+  
+
+.not-valid::after {
+    content: '*';
+    position: absolute;
+    top: -5px;
+    right: 0px;
+    width: 25px;
+    height: 25px;
+    background-image: url('../img/alert-circle-outline.png'); 
+    background-size: 25px;
+    transition: all 0.3s ease-out;
+  }
+
+
+/*Media Queries */
 @media screen and (min-width: 600px) {
     .header--signedin li {
         display: inline-block;

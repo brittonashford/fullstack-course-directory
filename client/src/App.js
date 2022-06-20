@@ -10,7 +10,7 @@ import Header from './Components/Header';
 import AuthRoute from './Components/AuthRoute';
 import CreateCourse from './Components/CreateCourse';
 import UpdateCourse from './Components/UpdateCourse';
-import Error from './Components/UpdateCourse';
+import Error from './Components/Error';
 import NotFound from './Components/NotFound';
 import Forbidden from './Components/Forbidden';
 
