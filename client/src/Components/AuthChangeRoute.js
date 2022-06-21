@@ -8,7 +8,7 @@ function AuthChangeRoute(){
 
     const { authUser, data } = useContext(AppContext);
 
-
+    //state
     const [ course, setCourse ] = useState(null);
     const [ canChange, setCanChange ] = useState(false);
     const [ isLoading, setIsLoading ] = useState(true);
@@ -18,8 +18,6 @@ function AuthChangeRoute(){
 
     //get the course the user is trying to update or delete
     useEffect( () => {
-        debugger;
-        console.log('Update Course useEffect');
         data.getCourseDetail(id)
         .then( (response) => {
             if(response) {
@@ -33,29 +31,21 @@ function AuthChangeRoute(){
         .catch( error => console.log(error.message) )
     }, [])
 
+    //make sure user didn't try anything sneaky with the url
     useEffect( () => {
         if(course && authUser){
             setIsLoading(false);
-            debugger;
             if(course.userId === authUser.id){
-                debugger;
                 setCanChange(true);
-                console.log('canChange = true');
             } else {
-                debugger;
                 setCanChange(false);
-                console.log('canChange = false. course: ', course);
             }
         } else {
             setIsLoading(true);
-        }
-                   
+        }                  
     }, [course, authUser])
 
-
-    
-
-    //if user is authenticated, take them to create/update page. if not, redirect to sign-in.
+    //if user is should be allowed to update, take them there. if not, redirect to forbidden.
     return(
         <React.Fragment>
             {isLoading ?

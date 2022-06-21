@@ -50,9 +50,6 @@ function UserSignIn() {
         emailNotBlank = false;
         allowContinue = false;
 
-        console.log('emailField: ', emailField)
-        console.log('passwordField: ', passwordField)
-
         //check that credentials are not blank
         if (credentials.emailAddress.length === 0){
             setErrors(errors => [...errors, 'email address is required.'])       
@@ -77,11 +74,9 @@ function UserSignIn() {
             signIn(credentials.emailAddress, credentials.password)
                 .then( (user) => {
                     if (!user) {
-                        console.log('Sign in unsuccessful.');
                         setErrors(errors => [...errors, 'Sign in unsuccessful. Invalid credentials.']);
                         allowContinue = false;
                     } else {
-                        console.log('Sign in successful.');
                         allowContinue = true;                       
                     }
                 })

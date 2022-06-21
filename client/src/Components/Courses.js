@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppContext } from '../Context';
 
 function Courses() {
@@ -7,35 +7,17 @@ function Courses() {
     const [ courseList, setCourseList ] = useState([]);
     const { data, authUser, nextStop, setNextStop } = useContext(AppContext);
 
+    const navigate = useNavigate();
 
     //get course list
     useEffect( () => {
         data.getCourseList()
             .then( response => setCourseList(response) )
-            .catch( error => console.log(error.message) )
+            .catch( error => {
+                console.log('error caught: ', error);
+                navigate('/error');
+            });
     }, [])
-
-    // useEffect( () => {
-    //     setNextStop('Courses');
-    // }, [])
-
-    //event handler
-    // onClick={() => handleNextStop()}
-
-    // const handleNextStop = () => {
-    //     debugger;
-    //     console.log('nextStep event handler hit');
-    //     setNextStop(prevState => {
-    //         if(!prevState){
-    //             debugger;
-    //             return 'CreateCourse';
-    //         } else {
-    //             debugger;
-    //             return prevState;
-    //         }
-    //     });
-    // }
-
 
     return(
         <React.Fragment>
@@ -60,8 +42,7 @@ function Courses() {
                     </React.Fragment>
                 )
                 :
-                (<React.Fragment></React.Fragment>)}
-                
+                (<React.Fragment></React.Fragment>)}                
             </div>
         </React.Fragment>
     );

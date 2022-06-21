@@ -55,9 +55,8 @@ function UserSignUp() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('handleSubmit hit');
-        console.log(newUser);
 
+        //reset
         setErrors([]);
         allowContinue = false;
         firstNameNotBlank = false;
@@ -108,12 +107,10 @@ function UserSignUp() {
                 //if something is returned it will be an error
                 .then( errors => {
                     if (errors.length) {
-                        console.log('error(s) occurred in createNewUser()');
                         setErrors(errors);
                         allowContinue = false;
                     } else { 
                         //no errors and no response means success
-                        console.log('createNewUser() was successful.'); 
                         allowContinue = true; 
                         signIn(newUser.emailAddress, newUser.password)                
                     }                   
@@ -140,7 +137,6 @@ function UserSignUp() {
             elementLabel.classList.remove('not-valid-label');
     }
     
-
     return(
         <React.Fragment>
             <div className="form--centered">

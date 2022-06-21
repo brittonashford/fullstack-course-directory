@@ -64,10 +64,8 @@ function CreateCourse(){
             .then( errors => {               
                 if (errors.length) {
                     setErrors(errors);
-                    console.log('error(s) occurred: ', errors);
                     allowContinue = false;
                 } else {
-                    console.log('createCourse() was successful!');
                     allowContinue = true;
                 }
             })

@@ -17,14 +17,11 @@ function CourseDetail() {
 
     //get course details
     useEffect( () => {
-        console.log('Hello from CourseDetail.js');
         data.getCourseDetail(id)
             .then( (response) => {
                 if(response) {
-                    console.log('getCourseDetail() was successful.')
                     setCourse(response);
                 } else {
-                    console.log('404, user typed a non-existent course into url.')
                     navigate('/not-found')
                 }
             })
@@ -34,7 +31,6 @@ function CourseDetail() {
     // wait to render course content until the API call has finished
     useEffect( () => {     
         if(course){
-            console.log('course retrieved, set isLoading to false and render page');
             setIsLoading(false);
         } else {
             setIsLoading(true)
@@ -45,10 +41,8 @@ function CourseDetail() {
     useEffect( () => {
         if(course && authUser && course.userId === authUser.id){
             setCanChange(true);
-            console.log('canChange = true');
         } else {
             setCanChange(false);
-            console.log('canChange = false');
         }
     }, [course, authUser])
 
@@ -112,8 +106,7 @@ function CourseDetail() {
                 </form>
             </div>
                 )
-              } 
-            
+              }            
         </React.Fragment>
     )
 };

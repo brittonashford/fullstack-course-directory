@@ -3,7 +3,6 @@ import { AppContext } from '../Context';
 import { Outlet, Navigate } from 'react-router-dom';
 
 //wrapper component for routes that require authentication
-
 function AuthRoute(){
 
     const { authUser } = useContext(AppContext);
