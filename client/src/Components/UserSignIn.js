@@ -2,10 +2,9 @@ import React, { useContext, useState } from 'react';
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AppContext } from '../Context';
+import { MdWarningAmber } from 'react-icons/md';
 
 function UserSignIn() {
-
-
 
     //store credentials in state
     const [ credentials, setCredentials ] = useState({
@@ -19,30 +18,22 @@ function UserSignIn() {
     //nav
     const navigate = useNavigate();
 
-    let allowSubmit = false;
+    //for validation
+    let emailNotBlank = false;
+    let passwordNotBlank = false;
     let allowContinue = false
-    // let emailField;
-    // let passwordField;
-    // let emailFieldLabel;
-    // let passwordFieldLabel;
 
     useEffect( () => {
         emailFieldLabel = document.getElementById('emailAddressLabel');
         passwordFieldLabel = document.getElementById('passwordLabel');
         emailField = document.getElementById('emailAddress');
         passwordField = document.getElementById('password');
-    
-        console.log('emailField: ', emailField)
-        console.log('passwordField: ', passwordField)
     }, [])
 
     let emailFieldLabel = document.getElementById('emailAddressLabel');
     let passwordFieldLabel = document.getElementById('passwordLabel');
     let emailField = document.getElementById('emailAddress');
     let passwordField = document.getElementById('password');
-
-
-
 
     //event handlers
     const handleChange = (e) => {
@@ -52,38 +43,42 @@ function UserSignIn() {
     }
 
     const handleSubmit = (e) => {
-        debugger;
-        
-        console.log('UserSignIn.handleSubmit() hit', credentials);
+
         e.preventDefault(); 
+
+        //reset each time, innocent until proven guilty
         setErrors([]);
+        passwordNotBlank = false;
+        emailNotBlank = false;
+        allowContinue = false;
+
         console.log('emailField: ', emailField)
         console.log('passwordField: ', passwordField)
 
         //check that credentials are not blank
         if (credentials.emailAddress.length === 0){
-            setErrors(errors => [...errors, 'email address is required.'])
-            allowSubmit = false;
+            setErrors(errors => [...errors, 'email address is required.'])       
             notValid(emailField, emailFieldLabel);
+            emailNotBlank = false;
         } else {
             valid(emailField, emailFieldLabel);
+            emailNotBlank = true;
         }
-
         
         if (credentials.password.length === 0){
             console.log('pw hit');
-            setErrors(errors => [...errors, 'password is required.'])
-            allowSubmit = false;
+            setErrors(errors => [...errors, 'password is required.'])          
             notValid(passwordField, passwordFieldLabel);
+            passwordNotBlank = false;
         } else {
             valid(passwordField, passwordFieldLabel);
-            allowSubmit = true;
+            passwordNotBlank = true;
         }
 
-        if(allowSubmit){
+        if(emailNotBlank && passwordNotBlank){
             signIn(credentials.emailAddress, credentials.password)
                 .then( (user) => {
-                    if (user === null) {
+                    if (!user) {
                         console.log('Sign in unsuccessful.');
                         setErrors(errors => [...errors, 'Sign in unsuccessful.']);
                         allowContinue = false;
@@ -92,21 +87,15 @@ function UserSignIn() {
                         allowContinue = true;                       
                     }
                 })
-            // .then( () => {
-            //     navigate('/');
-
-            //     // if(nextStop === 'Courses'){
-            //     //     debugger;
-            //         // navigate('/');
-            // //     } else if (nextStop === 'CreateCourse'){
-            // //         debugger;
-            // //         navigate('/courses/create');
-            // //     }
-
-            // })
+                .then( () => {
+                    if(allowContinue){
+                        navigate('/');
+                    }             
+                })
                 .catch( error => {
-                    console.log('an error occurred: ', error);
-                    navigate('error');
+                    console.log('error caught: ', error);
+
+                    // navigate('error');
                 });  
             }
     }
@@ -124,7 +113,7 @@ function UserSignIn() {
     return (
         <React.Fragment>
             <div className="form--centered">
-                <h2>Sign In</h2>  
+                <h2 className="page--title">Sign In</h2>  
                 {errors.length ? (
                     <React.Fragment>
                         <div className="validation--errors">
@@ -155,7 +144,7 @@ function UserSignIn() {
                         value={credentials.password}
                         onChange={handleChange} />
                     <button className="button" type="submit">Sign In</button>
-                    <Link to='/' className="button button-secondary" >Cancel</Link>
+                    <Link to='/' className="button button-secondary cancel--button" >Cancel</Link>
                 </form>
                 <p>Don't have a user account? Click here to <Link to='/sign-up' className="sign--up--link">sign up</Link>!</p>               
             </div>

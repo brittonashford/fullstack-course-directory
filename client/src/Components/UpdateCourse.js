@@ -47,7 +47,7 @@ function UpdateCourse(){
     return(
         <React.Fragment>
             <div className="wrap">
-                <h2>Update Course</h2>
+                <h2 className="page--title">Update Course</h2>
                 <form>
                     <div className="React.Fragment--flex">
                         <div>

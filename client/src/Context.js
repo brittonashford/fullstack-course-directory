@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Data from './Data';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import { IconName } from "react-icons/fa";
 
 export const AppContext = React.createContext();
 
@@ -39,7 +40,7 @@ export const Provider = (props) => {
 
         const user = await data.getUser(emailAddress, password)
 
-        if (user !== null) {     
+        if (user) {     
             console.log('getUser() returned...', user);   
             user.password = password;
             setAuthUser(user);           

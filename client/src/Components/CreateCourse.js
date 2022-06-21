@@ -1,4 +1,4 @@
-import React, { useState, useContext} from 'react';
+import React, { useState, useContext, useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AppContext } from '../Context'
 
@@ -15,6 +15,25 @@ function CreateCourse(){
     const [ validationErrors, setValidationErrors ] = useState([]);
 
     const navigate = useNavigate();
+
+     //for validation
+     let allowContinue = false;
+     let titleNotBlank = false;
+     let descriptionNotBlank = false;
+     let estTimeNotBlank = false;
+     let materialsNotBlank = false;
+
+     useEffect( () => {
+         titleFieldLabel = document.getElementById('titleFieldLabel');
+         titleField = document.getElementById('title');
+         descriptionFieldLabel = document.getElementById('descriptionFieldLabel');
+         descriptionField = document.getElementById('description');     
+     }, [])
+ 
+     let titleFieldLabel = document.getElementById('titleFieldLabel');
+     let titleField = document.getElementById('title');
+     let descriptionFieldLabel = document.getElementById('descriptionFieldLabel');
+     let descriptionField = document.getElementById('description');     
 
     let allowSubmit = false;
 
@@ -54,7 +73,7 @@ function CreateCourse(){
     return(
         <React.Fragment>
             <div className="wrap">
-                <h2>Create Course</h2>
+                <h2 className="page--title">Create Course</h2>
                 {validationErrors.length ? (
                     <React.Fragment>
                         <div className="validation--errors">
@@ -73,23 +92,23 @@ function CreateCourse(){
                 <form onSubmit={handleSubmit}>
                     <div className="main--flex">
                         <div>
-                            <label htmlFor="title">Course Title</label>
+                            <label id="titleFieldLabel" htmlFor="title">Course Title</label>
                             <input id="title" name="title" type="text" value={newCourseData.title} onChange={handleChange} />
 
                             <p>By {authUser.firstName} {authUser.lastName}</p>
 
-                            <label htmlFor="description">Course Description</label>
+                            <label id="descriptionFieldLabel" htmlFor="description">Course Description</label>
                             <textarea id="description" name="description" value={newCourseData.description} onChange={handleChange}></textarea>
                         </div>
                         <div>
-                            <label htmlFor="estimatedTime">Estimated Time</label>
+                            <label id ="estTimeFieldLabel" htmlFor="estimatedTime">Estimated Time</label>
                             <input id="estimatedTime" name="estimatedTime" type="text" value={newCourseData.estimatedTime} onChange={handleChange} />
 
-                            <label htmlFor="materialsNeeded">Materials Needed</label>
+                            <label id ="materialsFieldLabel" htmlFor="materialsNeeded">Materials Needed</label>
                             <textarea id="materialsNeeded" name="materialsNeeded" value={newCourseData.materialsNeeded} onChange={handleChange}></textarea>
                         </div>
                     </div>
-                    <button className="button" type="submit">Create Course</button><Link className="button button-secondary" to='/' >Cancel</Link>
+                    <button className="button" type="submit">Create Course</button><Link className="button button-secondary cancel--button" to='/' >Cancel</Link>
                 </form>
             </div>
         </React.Fragment>

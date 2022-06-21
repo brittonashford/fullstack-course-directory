@@ -5,7 +5,7 @@ import { AppContext } from '../Context';
 function Courses() {
    //stores and updates the course list in state
     const [ courseList, setCourseList ] = useState([]);
-    const { data, nextStop, setNextStop } = useContext(AppContext);
+    const { data, authUser, nextStop, setNextStop } = useContext(AppContext);
 
 
     //get course list
@@ -48,14 +48,20 @@ function Courses() {
                         </Link>              
                     )
                 }
-
-                <Link to={`courses/create`} className="course--module course--add--module">
-                    <span className="course--add--title">
-                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                        viewBox="0 0 13 13" className="add"><polygon points="7,6 7,0 6,0 6,6 0,6 0,7 6,7 6,13 7,13 7,7 13,7 13,6 "></polygon></svg>
-                        New Course
-                    </span>
-                </Link>
+                {authUser? (
+                    <React.Fragment>
+                        <Link to={`courses/create`} className="course--module course--add--module">
+                            <span className="course--add--title">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                viewBox="0 0 13 13" className="add"><polygon points="7,6 7,0 6,0 6,6 0,6 0,7 6,7 6,13 7,13 7,7 13,7 13,6 "></polygon></svg>
+                                New Course
+                            </span>
+                        </Link>
+                    </React.Fragment>
+                )
+                :
+                (<React.Fragment></React.Fragment>)}
+                
             </div>
         </React.Fragment>
     );

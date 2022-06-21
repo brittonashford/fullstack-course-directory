@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { AppContext } from '../Context';
+import { ImBooks } from "react-icons/im";
 
 function Header() {
     const { authUser } = useContext(AppContext);
@@ -8,7 +9,7 @@ function Header() {
     return(
         <header>
             <div className="wrap header--flex">
-                <h1 className="header--logo"><Link to='/'>Courses</Link></h1>
+            <h1 className="header--logo"><ImBooks className="books"/><Link to='/'>Course Catalog</Link></h1>
                 <nav>  
                     {authUser ? (
                         <React.Fragment>

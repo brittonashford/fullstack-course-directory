@@ -9,10 +9,10 @@ module.exports = (sequelize, DataTypes) => {
            allowNull: false,
            validate: {
                notNull: {
-                   msg: '"title" is required.'
+                   msg: 'Course Title is required.'
                },
                notEmpty: {
-                   msg: 'Title cannot be blank.'
+                   msg: 'Course Title is required.'
                }
            }
        },
@@ -21,10 +21,10 @@ module.exports = (sequelize, DataTypes) => {
            allowNull: false,
            validate: {
                notNull: {
-                   msg: '"description" is required.'
+                   msg: 'Description is required.'
                },
                notEmpty: {
-                   msg: 'Description cannot be blank.'
+                   msg: 'Description is required.'
                }
            }
        },

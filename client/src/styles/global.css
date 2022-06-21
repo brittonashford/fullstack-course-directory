@@ -61,10 +61,11 @@ header nav a:hover {
 .header--signedin li {
     text-align: right;
     line-height: 1.25;
+    margin-left: 1rem !important;
 }
 .header--signedout li {
     display: inline-block;
-    margin-left: .5rem;
+    margin-left: 1rem;
 }
 .course--module {
     background: #FFF;
@@ -106,7 +107,7 @@ header nav a:hover {
     border-bottom: 1px solid #888;
     margin: 3rem 0 .5rem;
     font-size: .9rem;
-    color: #555;
+    color: #32373b;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -127,7 +128,7 @@ header nav a:hover {
     margin: -2rem 0 2rem;
 }
 .validation--errors {
-    background: #e9e5f0;
+    background: #f2e6e6;
     padding: 1rem;
     border-radius: .5rem;
     margin-bottom: 2.5rem;
@@ -148,7 +149,9 @@ header nav a:hover {
 .validation--errors li:last-child {
     margin-bottom: 0;
 }
-
+.page--title{
+    color: #32373b;
+}
 .form--centered {
     max-width: 510px;
     margin: 0 auto;
@@ -177,7 +180,7 @@ textarea {
     min-height: 300px;
 }
 .button {
-    background: #354f52;
+    background: #2f3e46;
     color: #fff;
     font-size: 1rem;
     padding: .75rem 1.5rem;
@@ -198,27 +201,27 @@ textarea {
     cursor: pointer;
 }
 .button-secondary {
-    color: #465963;
+    color: #2f3e46;
     background: #d0d5d8;
     box-shadow: 0 0 0 2px #2F3E46 inset;
     transition: box-shadow 0.2s, color 0.2s;
 }
 .button-secondary:hover {
-    color: #2f3e46;
+    background: #dee2e4;
     box-shadow: 0 0 0 2px #2f3e46 inset;
     cursor: pointer;
 }
+
 input:focus, button:focus, .button:focus, textarea:focus {
     border: none;
     border-radius: 0;
     outline: 2px solid #465963;
 }
-.sign--up--link:hover{
-    text-decoration: underline;
+
+.cancel--button{
+    text-decoration: none !important;
 }
-.sign--up--link{
-    color: #465963;
-}
+
 
 /* Validation */
 .not-valid {
@@ -231,18 +234,16 @@ position: relative;
 color: #800;
 }
   
+/* books header icon*/
+.books{
+    height: 1.3em;
+    width: 1.3em;
+    margin-right:20px;
+    align-content: center;
+    vertical-align:bottom;
 
-.not-valid::after {
-    content: '*';
-    position: absolute;
-    top: -5px;
-    right: 0px;
-    width: 25px;
-    height: 25px;
-    background-image: url('../img/alert-circle-outline.png'); 
-    background-size: 25px;
-    transition: all 0.3s ease-out;
-  }
+}
+
 
 
 /*Media Queries */
