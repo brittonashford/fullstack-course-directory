@@ -12,7 +12,7 @@ function CreateCourse(){
         materialsNeeded: "",
         userId: authUser.id
     });
-    const [ validationErrors, setValidationErrors ] = useState([]);
+    const [ errors, setErrors ] = useState([]);
 
     const navigate = useNavigate();
 
@@ -20,8 +20,6 @@ function CreateCourse(){
      let allowContinue = false;
      let titleNotBlank = false;
      let descriptionNotBlank = false;
-     let estTimeNotBlank = false;
-     let materialsNotBlank = false;
 
      useEffect( () => {
          titleFieldLabel = document.getElementById('titleFieldLabel');
@@ -35,7 +33,6 @@ function CreateCourse(){
      let descriptionFieldLabel = document.getElementById('descriptionFieldLabel');
      let descriptionField = document.getElementById('description');     
 
-    let allowSubmit = false;
 
     //event handlers
     const handleChange = (e) => {
@@ -45,22 +42,37 @@ function CreateCourse(){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('calling create course with newCourseData: ', newCourseData);
-        console.log('calling create course with authUser: ', authUser);
+
+        //reset validation params
+        setErrors([]);
+        allowContinue = false;
+
+        //flag erroneous fields
+        if (titleField.value === ''){     
+            notValid(titleField, titleFieldLabel);
+        } else {
+            valid(titleField, titleFieldLabel);
+        }
+        
+        if (descriptionField.value === ''){      
+            notValid(descriptionField, descriptionFieldLabel);
+        } else {
+            valid(descriptionField, descriptionFieldLabel);
+        }
 
         data.createCourse(newCourseData, authUser)
             .then( errors => {               
                 if (errors.length) {
-                    setValidationErrors(errors);
+                    setErrors(errors);
                     console.log('error(s) occurred: ', errors);
-                    allowSubmit = false;
+                    allowContinue = false;
                 } else {
                     console.log('createCourse() was successful!');
-                    allowSubmit = true;
+                    allowContinue = true;
                 }
             })
             .then( () => {
-                if(allowSubmit){
+                if(allowContinue){
                     navigate('/');
                 } 
             })  
@@ -70,16 +82,26 @@ function CreateCourse(){
             });
     }
 
+    function notValid(element, elementLabel) {
+        element.classList.add('not-valid');
+        elementLabel.classList.add('not-valid-label');
+    }
+
+    function valid(element, elementLabel) {
+            element.classList.remove('not-valid');
+            elementLabel.classList.remove('not-valid-label');
+    }
+
     return(
         <React.Fragment>
             <div className="wrap">
                 <h2 className="page--title">Create Course</h2>
-                {validationErrors.length ? (
+                {errors.length ? (
                     <React.Fragment>
                         <div className="validation--errors">
                             <h3>Validation Errors</h3>
                             <ul>
-                                {validationErrors.map( (error, index) => (
+                                {errors.map( (error, index) => (
                                     <li key={index}>{error}</li>
                                 ))}
                             </ul>

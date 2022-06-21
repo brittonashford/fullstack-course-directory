@@ -111,6 +111,24 @@ header nav a:hover {
     text-transform: uppercase;
     letter-spacing: 2px;
 }
+
+.course--desc--body{
+    margin-left: 15px !important;
+}
+.course--desc--body p{
+    margin-bottom: 0 !important;
+    margin-top: 30px;
+}
+.course--desc--body ul{
+    margin-left: 30px !important;
+}
+.course--materials ul{
+    margin-left: 15px !important;
+}
+.course--time p{
+    margin-left: 15px !important;
+}
+
 .course--name {
     font-size: 2rem;
     margin-bottom: .5rem;
@@ -197,7 +215,7 @@ textarea {
     margin-bottom: 0;
 }
 .button:not(.button-secondary):hover {
-    background: #465963;
+    background: #1C2E37;
     cursor: pointer;
 }
 .button-secondary {
@@ -205,10 +223,12 @@ textarea {
     background: #d0d5d8;
     box-shadow: 0 0 0 2px #2F3E46 inset;
     transition: box-shadow 0.2s, color 0.2s;
+    text-decoration: none !important;
 }
 .button-secondary:hover {
     background: #dee2e4;
     box-shadow: 0 0 0 2px #2f3e46 inset;
+    transition: box-shadow 0.2s, color 0.2s;
     cursor: pointer;
 }
 
@@ -241,7 +261,6 @@ color: #800;
     margin-right:20px;
     align-content: center;
     vertical-align:bottom;
-
 }
 
 

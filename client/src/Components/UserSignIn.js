@@ -80,7 +80,7 @@ function UserSignIn() {
                 .then( (user) => {
                     if (!user) {
                         console.log('Sign in unsuccessful.');
-                        setErrors(errors => [...errors, 'Sign in unsuccessful.']);
+                        setErrors(errors => [...errors, 'Sign in unsuccessful. Invalid credentials.']);
                         allowContinue = false;
                     } else {
                         console.log('Sign in successful.');

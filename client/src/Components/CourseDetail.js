@@ -22,6 +22,11 @@ function CourseDetail() {
             .catch( error => console.log(error.message) )
     }, [])
 
+    // get instructor's name once course has been retrieved
+    useEffect( () => {
+        console.log(course.userInfo);
+    }, [course]);
+
     //determine if user should be allowed to update/delete course
     useEffect( () => {
         if(course && authUser && course.userId === authUser.id){
@@ -73,14 +78,15 @@ function CourseDetail() {
                         <div>
                             <h3 className="course--detail--title">Course</h3>
                             <h4 className="course--name">{course.title}</h4>
-                            <ReactMarkdown>{course.description}</ReactMarkdown>
+                            {/* <p>By {course.userInfo.firstName} {course.userInfo.lastName}</p> */}
+                            <div className="course--desc--body"><ReactMarkdown>{course.description}</ReactMarkdown></div>
                         </div>
                         <div>
                             <h3 className="course--detail--title">Estimated Time</h3>
-                            <p>{course.estimatedTime}</p>
+                            <div className="course--time"><p>{course.estimatedTime}</p></div>
 
                             <h3 className="course--detail--title">Materials Needed</h3>
-                            <ReactMarkdown>{course.materialsNeeded}</ReactMarkdown>
+                            <div className="course--materials"><ReactMarkdown>{course.materialsNeeded}</ReactMarkdown></div>
                         </div>
                     </div>
                 </form>
