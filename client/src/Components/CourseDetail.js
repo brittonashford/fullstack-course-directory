@@ -6,8 +6,9 @@ import ReactMarkdown from 'react-markdown';
 function CourseDetail() {
 
     //state
-    const [ course, setCourse ] = useState({});
+    const [ course, setCourse ] = useState(null);
     const [ canChange, setCanChange ] = useState(false);
+    const [ isLoading, setIsLoading ] = useState(true);
 
     const { data, authUser } = useContext(AppContext);
     const { id } = useParams();
@@ -22,9 +23,14 @@ function CourseDetail() {
             .catch( error => console.log(error.message) )
     }, [])
 
-    // get instructor's name once course has been retrieved
-    useEffect( () => {
-        console.log(course.userInfo);
+    // wait to render course content until the API call has finished
+    useEffect( () => {     
+        if(course){
+            console.log('course retrieved, set isLoading to false and render page');
+            setIsLoading(false);
+        } else {
+            setIsLoading(true)
+        }       
     }, [course]);
 
     //determine if user should be allowed to update/delete course
@@ -70,15 +76,18 @@ function CourseDetail() {
                     <Link to={'/'} className="button button-secondary">Return to List</Link>
                 </div>
             </div>
-              
-            <div className="wrap">
+              {isLoading ? 
+                (<h2 class="loading--msg">Loading Course...</h2>)
+                :
+                (
+                <div className="wrap">
                 <h2 className="course--detail--label">Course Detail</h2>
                 <form>
                     <div className="main--flex">
                         <div>
                             <h3 className="course--detail--title">Course</h3>
                             <h4 className="course--name">{course.title}</h4>
-                            {/* <p>By {course.userInfo.firstName} {course.userInfo.lastName}</p> */}
+                            <p>By {course.userInfo.firstName} {course.userInfo.lastName}</p>
                             <div className="course--desc--body"><ReactMarkdown>{course.description}</ReactMarkdown></div>
                         </div>
                         <div>
@@ -91,6 +100,9 @@ function CourseDetail() {
                     </div>
                 </form>
             </div>
+                )
+              } 
+            
         </React.Fragment>
     )
 };
