@@ -19,7 +19,15 @@ function CourseDetail() {
     useEffect( () => {
         console.log('Hello from CourseDetail.js');
         data.getCourseDetail(id)
-            .then( response => setCourse(response) )
+            .then( (response) => {
+                if(response) {
+                    console.log('getCourseDetail() was successful.')
+                    setCourse(response);
+                } else {
+                    console.log('404, user typed a non-existent course into url.')
+                    navigate('/not-found')
+                }
+            })
             .catch( error => console.log(error.message) )
     }, [])
 
@@ -59,7 +67,10 @@ function CourseDetail() {
                 }
             })
             .then( () => navigate('/'))         
-            .catch( error => { throw new Error(error) });
+            .catch( error => {
+                console.log('error caught: ', error);
+                navigate('/error');
+            });
     }
 
     return(
@@ -77,7 +88,7 @@ function CourseDetail() {
                 </div>
             </div>
               {isLoading ? 
-                (<h2 class="loading--msg">Loading Course...</h2>)
+                (<React.Fragment></React.Fragment>)
                 :
                 (
                 <div className="wrap">

@@ -33,29 +33,36 @@ router.get('/courses', asyncHandler(async(req, res) => {
 
 //get individual course + user
 router.get('/courses/:id', asyncHandler(async(req, res) => {
-    const course = await Course.findByPk(req.params.id, {
-        include: [
-            {
-                model: User,
-                as: 'userInfo',
-                attributes: {
-                    exclude: [
-                        'password',
-                        'createdAt',
-                        'updatedAt'
-                    ]
+    try{
+        const course = await Course.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    as: 'userInfo',
+                    attributes: {
+                        exclude: [
+                            'password',
+                            'createdAt',
+                            'updatedAt'
+                        ]
+                    }
                 }
+            ],
+            attributes: {
+                exclude: [
+                    'createdAt',
+                    'updatedAt'
+                ]
             }
-        ],
-        attributes: {
-            exclude: [
-                'createdAt',
-                'updatedAt'
-            ]
+        });
+        if(course) {
+            res.status(200).json(course);
+        } else {
+            res.status(404).json({"Message": "Course Not Found."})
         }
-    });
-
-    res.json(course);
+    } catch(error) {
+        throw error; //punt to global error handler
+    }  
 }));
 
 // create new course (protected route)

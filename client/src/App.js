@@ -13,6 +13,7 @@ import UpdateCourse from './Components/UpdateCourse';
 import Error from './Components/Error';
 import NotFound from './Components/NotFound';
 import Forbidden from './Components/Forbidden';
+import AuthChangeRoute from './Components/AuthChangeRoute';
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
                 <Route path='sign-out' element={ <UserSignOut /> } /> 
                 <Route path='/' element={ <Courses /> } />
                     <Route path='courses/:id' index element={ <CourseDetail /> } />                
-                    <Route path='courses/:id/update' element={ <AuthRoute /> }>
+                    <Route path='courses/:id/update' element={ <AuthChangeRoute /> }>
                         <Route index element={ <UpdateCourse /> } />
                     </Route> 
                     <Route path='courses/create' element={ <AuthRoute /> }>
@@ -36,6 +37,7 @@ function App() {
                     </Route>
                 <Route path='error' element={ <Error /> } />
                 <Route path='forbidden' element={ <Forbidden /> } />
+                <Route path='not-found' element= { <NotFound /> } />
                 <Route path='*' element={ <NotFound /> } />
             </Routes>       
         </React.Fragment>

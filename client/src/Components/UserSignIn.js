@@ -1,8 +1,6 @@
-import React, { useContext, useState } from 'react';
-import { useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AppContext } from '../Context';
-import { MdWarningAmber } from 'react-icons/md';
 
 function UserSignIn() {
 
@@ -94,8 +92,7 @@ function UserSignIn() {
                 })
                 .catch( error => {
                     console.log('error caught: ', error);
-
-                    // navigate('error');
+                    navigate('error');
                 });  
             }
     }

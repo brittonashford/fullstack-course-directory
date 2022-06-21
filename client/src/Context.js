@@ -8,19 +8,9 @@ export const AppContext = React.createContext();
 
 export const Provider = (props) => {
 
-
     //state  
     const [ authUserCookie, setAuthUserCookie ]  = useState(Cookies.get('authUserCookie')); 
     const [ authUser, setAuthUser ] = useState(authUserCookie ? JSON.parse(authUserCookie) : null);
-    // const [ nextStop, setNextStop ] = useState(prevState => {
-    //     if(!prevState){
-    //         debugger;
-    //         return 'CreateCourse';
-    //     } else {
-    //         debugger;
-    //         return prevState;
-    //     }
-    // });
 
     //set cookie once authUser is set
     useEffect( () => {

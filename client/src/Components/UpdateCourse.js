@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../Context';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 function UpdateCourse(){
@@ -16,9 +16,11 @@ function UpdateCourse(){
         console.log('Update Course useEffect');
         data.getCourseDetail(id)
             .then( response => setUpdatedCourseData(response) )
-            .catch( error => console.log(error.message) )
+            .catch( error => {
+                console.log('error caught: ', error);
+                navigate('/error');
+            })
     }, [])
-
 
     //event handlers
     const handleChange = (e) => {
@@ -37,7 +39,10 @@ function UpdateCourse(){
                 }
             })
             .then( () => navigate(`/courses/${id}`))         
-            .catch( error => {throw new Error(error) });
+            .catch( error => {
+                console.log('error caught: ', error);
+                navigate('/error');
+            });
     }
 
     const handleCancel = (e) => {

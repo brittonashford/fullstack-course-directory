@@ -59,6 +59,8 @@ export default class Data {
         if (response.status === 200) {
             console.log('getCourseDetail API call succeeded!');
             return response.json().then(data => data);
+        } else if (response.status === 404) {
+            return;
         } else {
             console.log(`getCourseDetail API call failed. Response status: ${response.status}`);
             throw new Error();
