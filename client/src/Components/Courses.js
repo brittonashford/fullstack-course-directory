@@ -5,7 +5,7 @@ import { AppContext } from '../Context';
 function Courses() {
    //stores and updates the course list in state
     const [ courseList, setCourseList ] = useState([]);
-    const { data, authUser, nextStop, setNextStop } = useContext(AppContext);
+    const { data, authUser } = useContext(AppContext);
 
     const navigate = useNavigate();
 

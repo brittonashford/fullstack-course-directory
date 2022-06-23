@@ -18,8 +18,7 @@ function CreateCourse(){
 
      //for validation
      let allowContinue = false;
-     let titleNotBlank = false;
-     let descriptionNotBlank = false;
+
 
      useEffect( () => {
          titleFieldLabel = document.getElementById('titleFieldLabel');
@@ -113,19 +112,19 @@ function CreateCourse(){
                     <div className="main--flex">
                         <div>
                             <label id="titleFieldLabel" htmlFor="title">Course Title</label>
-                            <input id="title" name="title" type="text" value={newCourseData.title} onChange={handleChange} />
+                            <input id="title" name="title" type="text" value={newCourseData.title || ""} onChange={handleChange} />
 
-                            <p>By {authUser.firstName} {authUser.lastName}</p>
+                            <p>By {authUser.firstName || ""} {authUser.lastName || ""}</p>
 
                             <label id="descriptionFieldLabel" htmlFor="description">Course Description</label>
                             <textarea id="description" name="description" value={newCourseData.description} onChange={handleChange}></textarea>
                         </div>
                         <div>
                             <label id ="estTimeFieldLabel" htmlFor="estimatedTime">Estimated Time</label>
-                            <input id="estimatedTime" name="estimatedTime" type="text" value={newCourseData.estimatedTime} onChange={handleChange} />
+                            <input id="estimatedTime" name="estimatedTime" type="text" value={newCourseData.estimatedTime || ""} onChange={handleChange} />
 
                             <label id ="materialsFieldLabel" htmlFor="materialsNeeded">Materials Needed</label>
-                            <textarea id="materialsNeeded" name="materialsNeeded" value={newCourseData.materialsNeeded} onChange={handleChange}></textarea>
+                            <textarea id="materialsNeeded" name="materialsNeeded" value={newCourseData.materialsNeeded || ""} onChange={handleChange}></textarea>
                         </div>
                     </div>
                     <button className="button" type="submit">Create Course</button><Link className="button button-secondary cancel--button" to='/' >Cancel</Link>

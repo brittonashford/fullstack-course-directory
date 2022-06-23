@@ -6,8 +6,8 @@ function UserSignIn() {
 
     //store credentials in state
     const [ credentials, setCredentials ] = useState({
-        emailAddress: '',
-        password: ''
+        emailAddress: "",
+        password: ""
     });
 
     const [ errors, setErrors ] = useState([]);
@@ -74,7 +74,7 @@ function UserSignIn() {
             signIn(credentials.emailAddress, credentials.password)
                 .then( (user) => {
                     if (!user) {
-                        setErrors(errors => [...errors, 'Sign in unsuccessful. Invalid credentials.']);
+                        setErrors(errors => [...errors, 'Invalid credentials.']);
                         allowContinue = false;
                     } else {
                         allowContinue = true;                       
@@ -126,14 +126,14 @@ function UserSignIn() {
                         id="emailAddress" 
                         name="emailAddress" 
                         type="email" 
-                        value={credentials.emailAddress}
+                        value={credentials.emailAddress || ""}
                         onChange={handleChange} />
                     <label id="passwordLabel" htmlFor="password">Password</label>
                     <input 
                         id="password" 
                         name="password" 
                         type="password" 
-                        value={credentials.password}
+                        value={credentials.password || ""}
                         onChange={handleChange} />
                     <button className="button" type="submit">Sign In</button>
                     <Link to='/' className="button button-secondary cancel--button" >Cancel</Link>

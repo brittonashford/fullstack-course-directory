@@ -132,19 +132,19 @@ function UpdateCourse(){
                     <div className="React.Fragment--flex">
                         <div>
                             <label id="titleFieldLabel" htmlFor="title">Course Title</label>
-                            <input id="title" name="title" type="text" value={updatedCourseData.title} onChange={handleChange}/>
+                            <input id="title" name="title" type="text" value={updatedCourseData.title || ""} onChange={handleChange}/>
 
-                            <p>By {authUser.firstName} {authUser.lastName}</p>
+                            <p>By {authUser.firstName || ""} {authUser.lastName || ""}</p>
 
                             <label id="descriptionFieldLabel" htmlFor="description">Course Description</label>
                             <textarea id="description" name="description" value={updatedCourseData.description} onChange={handleChange}></textarea>
                         </div>
                         <div>
                             <label htmlFor="estimatedTime">Estimated Time</label>
-                            <input id="estimatedTime" name="estimatedTime" type="text" value={updatedCourseData.estimatedTime} onChange={handleChange}/>
+                            <input id="estimatedTime" name="estimatedTime" type="text" value={updatedCourseData.estimatedTime || ""} onChange={handleChange}/>
 
                             <label htmlFor="materialsNeeded">Materials Needed</label>
-                            <textarea id="materialsNeeded" name="materialsNeeded" value={updatedCourseData.materialsNeeded} onChange={handleChange}></textarea>
+                            <textarea id="materialsNeeded" name="materialsNeeded" value={updatedCourseData.materialsNeeded || ""} onChange={handleChange}></textarea>
                         </div>
                     </div>
                     <button className="button" type="submit" onClick={handleSubmit}>Update Course</button><button className="button button-secondary" onClick={handleCancel}>Cancel</button>
