@@ -8,11 +8,6 @@ const courseRoutes = require('./routes/course');
 const userRoutes = require('./routes/user');
 const cors = require('cors');
 
-const corsOptions = {
-  origin: 'http://localhost:3000',
-  optionsSuccessStatus: 200
-};
-
 
 // variable to enable global error logging
 const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'true';
@@ -27,7 +22,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 // cors
-app.use(cors(corsOptions));
+app.use(cors());
 
 // use course and user routes
 app.use('/api', courseRoutes);
