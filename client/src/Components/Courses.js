@@ -19,9 +19,24 @@ function Courses() {
             });
     }, [])
 
+    const alert = document.getElementById('welcome-msg-alert');
+    const handleClose = () => {     
+        alert.classList.add('hide-alert');
+    }
+
     return(
         <React.Fragment>
+        {authUser?
+        (<React.Fragment></React.Fragment>)
+        :
+        (<div id="welcome-msg-alert">
+                <button id="alert-close-btn" onClick={handleClose}>x</button>
+                <h3 id="welcome-msg">Welcome to my Course Catalog app. Please sign in to create, update, and delete courses.</h3>            
+            </div>)}
+            
+            <h2 id="current-courses">Current Courses</h2>
             <div className="wrap main--grid">
+            
                 {
                     courseList.map((course, index) =>
                         <Link key={course.id} to={`courses/${course.id}`} className="course--module course--link">

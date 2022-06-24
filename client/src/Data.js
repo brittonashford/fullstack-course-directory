@@ -113,9 +113,10 @@ export default class Data {
         
         if(response.status === 204){
             return [];
-        } else if (response.status === 401){
+        }else if (response.status === 401 || response.status === 404 || response.status === 500){
             return response.json().then(data => {return data});
-        } else if (response.status === 404) {
+        } else {
+            console.log(response.status);
             throw new Error();
         }
     }
@@ -129,6 +130,9 @@ export default class Data {
             return [];
         } else if (response.status === 403) {
             return response.json().then(data => {return data});
+        } else {
+            console.log(response.status);
+            throw new Error();
         }
     }
 
